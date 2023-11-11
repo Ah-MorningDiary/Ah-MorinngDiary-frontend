@@ -61,7 +61,7 @@ export const Button = ({
     return (
       <button
         className="btn-primary btn-default"
-        style={{ width: width, height: height }}
+        style={{ width: width, height: height, fontSize: fontSize }}
         {...rest}
       >
         {children}
@@ -71,7 +71,7 @@ export const Button = ({
     return (
       <button
         className="btn-secondary btn-default"
-        style={{ width: width, height: height }}
+        style={{ width: width, height: height, fontSize: fontSize }}
         {...rest}
       >
         {children}

@@ -93,55 +93,58 @@ export default function Writing() {
   if (error) return <p>지원이 되지 않는 기종입니다.🤷‍</p>;
 
   return (
-    <div className="Writing-wrapper">
+    <>
       <HomeButton />
-      <div className="Writing-container">
-        <div className="Writing-item Writing-text">
-          <div className="ButtonUploader">
-            <div>
-              <ImageUploader onImageUpload={handleImageUpload} />
-              {uploadedImage && <div></div>}
+      <div className="Writing-wrapper">
+        <div className="Writing-container">
+          <div className="Writing-item Writing-text">
+            <div className="ButtonUploader">
+              <div>
+                <ImageUploader onImageUpload={handleImageUpload} />
+                {uploadedImage && <div></div>}
+              </div>
             </div>
+            {/* 여기에 text 넣어서 음성 녹음 저장 연결하기 */}
+            {text}
+            <text className="Writing-text"></text>
           </div>
-          {dummyText}
-          <text className="Writing-text"></text>
-        </div>
-        <div className="Writing-btns">
-          <Button
-            type={"btn-mic"}
-            className={`btn-mic ${isRecordings ? "active" : ""}`}
-            onClick={() => {
-              handleMicButtonClick();
-              if (isRecording) {
-                stopSpeechToText();
-              } else {
-                startSpeechToText();
-              }
-            }}
-          >
-            {isRecording ? "stop" : "Start"}
-          </Button>
+          <div className="Writing-btns">
+            <Button
+              type={"btn-mic"}
+              className={`btn-mic ${isRecordings ? "active" : ""}`}
+              onClick={() => {
+                handleMicButtonClick();
+                if (isRecording) {
+                  stopSpeechToText();
+                } else {
+                  startSpeechToText();
+                }
+              }}
+            >
+              {isRecording ? "stop" : "Start"}
+            </Button>
 
-          <Button type={"btn-gallery"}></Button>
-        </div>
+            <Button type={"btn-gallery"}></Button>
+          </div>
 
-        <div className="btn-items btn-group">
-          <Button
-            type="secondary"
-            style={{ fontSize: "16px", width: "100%", height: "40px" }}
-            onClick={handleClickSave}
-          >
-            저장하기
-          </Button>
-          <Button
-            type="primary"
-            style={{ fontSize: "16px", width: "100%", height: "40px" }}
-            onClick={handleClickErase}
-          >
-            지우기
-          </Button>
+          <div className="btn-items btn-group">
+            <Button
+              type="primary"
+              style={{ fontSize: "1.5rem", width: "100%", height: "50px" }}
+              onClick={handleClickSave}
+            >
+              저장하기
+            </Button>
+            <Button
+              type="secondary"
+              style={{ fontSize: "1.5rem", width: "100%", height: "50px" }}
+              onClick={handleClickErase}
+            >
+              지우기
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

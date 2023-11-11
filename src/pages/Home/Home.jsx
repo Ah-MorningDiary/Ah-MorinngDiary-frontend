@@ -2,7 +2,7 @@ import "./Home.scss";
 import { useState } from "react";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { Demo } from "./Demo";
+import { Book } from "./Book";
 
 export default function Home() {
   const linkWriting = "/writing";

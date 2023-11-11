@@ -80,8 +80,11 @@ $bookBackgroundwithBookmarkUrl: url('/img/bookBackgroundwithBookmark.png');
 @media screen and (max-width: 767px) {
 
   .ButtonUploader{
+    margin-left: 100px;
     max-width: 320px;
     max-height: 320px;
+    min-width: 320px;
+    min-height: 200px;
     @include place-center;
     padding: 1rem;
     bottom: 1rem;
