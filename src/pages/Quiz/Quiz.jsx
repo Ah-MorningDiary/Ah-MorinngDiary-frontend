@@ -8,6 +8,7 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 
 export default function Quiz() {
+  const numOfQuestions = 6;
   const linkHome = "/home";
   const [selectedOption, setSelectedOption] = useState("");
   const [questionNum, setQuestionNum] = useState(1);
@@ -36,7 +37,7 @@ export default function Quiz() {
   };
 
   const handleForward = () => {
-    if (questionNum < 10) {
+    if (questionNum < numOfQuestions) {
       setQuestionNum(questionNum + 1);
     }
   };
@@ -134,7 +135,7 @@ export default function Quiz() {
                     그런 건 내 룰은 나만 정할래 yeah 볼 거야 금지된 걸 Never
                     hold back 더 자유롭게
                     Boom, boom, boom 내 심장이 뛰네
-                    
+
                     Get it like boom, boom, boom
                     Get it like boom, boom, boom (boom, boom now)
                     Boom, boom, boom 내 심장이 뛰네
@@ -170,7 +171,7 @@ export default function Quiz() {
             이전
           </Button>
 
-          {questionNum === 10 ? (
+          {questionNum === numOfQuestions ? (
             <Button
               type={"primary"}
               width={"160px"}
