@@ -10,18 +10,22 @@ import { BASE_URL } from "../../utils/URL";
 export default function Quiz() {
   const numOfQuestions = 6;
   const linkHome = "/home";
-  const [selectedOption, setSelectedOption] = useState("");
+  const linkQuizResult = "/quiz/result";
+  const navigate = useNavigate();
   const [questionNum, setQuestionNum] = useState(1);
+  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedOptionList, setSelectedOptionList] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleOptionChange = (event) => {
     event.preventDefault();
     setSelectedOption(event.target.value);
     console.log("You have selected: ", selectedOption);
-    // 응답 처리. 선택한 답을 저장 (다시 돌아오면 고칠 수 있도록)
-  };
 
-  const handleOptionSave = () => {
-    console.log("Saved what you have chosen");
+    // 선택한 답을 배열에 저장 -> 나중에 POST 요청의 params로 전달
+    setSelectedOptionList(prevOptions => [...prevOptions, event.target.value]);
+
+    // 다시 돌아오면 고칠 수 있도록
   };
 
   const handleBackward = () => {
@@ -31,9 +35,8 @@ export default function Quiz() {
   };
 
   const handleSubmit = () => {
-    console.log("Submitted uccessfully");
-    // 제출 후 로직 짜기
-    // 결과 페이지로 넘어가게
+    setIsSubmitted(true);
+    navigate(linkQuizResult); 
   };
 
   const handleForward = () => {
@@ -42,11 +45,12 @@ export default function Quiz() {
     }
   };
 
+  // 퀴즈 받아오는 GET 요청
   // date는 'YYYY-MM-DD' 형식으로 변환해줌
   let date = new Date();
   date.setDate(date.getDate() - 1);
   const dateYesterday = date.toISOString().split("T")[0];
-  const params = {
+  const paramsToGetQuiz = {
     date: dateYesterday,
     num: questionNum,
   };
@@ -62,7 +66,7 @@ export default function Quiz() {
     console.log(`Question Number: ${questionNum}`);
 
     axios
-      .get(`${BASE_URL}/quiz`, { params })
+      .get(`${BASE_URL}/quiz`, { paramsToGetQuiz })
       .then((response) => {
         const { Q_num, Question, Answer } = response.data;
         console.log(
@@ -74,6 +78,24 @@ export default function Quiz() {
         console.error("Error: failed fetching the quiz", error);
       });
   }, [questionNum]);
+
+
+  // 제출 POST 요청
+  const paramsToSubmit = {
+    answer: selectedOptionList,
+  };
+
+  useEffect(() => {
+    axios
+    .post(`${BASE_URL}/quiz/submit`, { paramsToSubmit })
+    .then((response) => {
+      console.log("Submitted uccessfully");
+    })
+    .catch((error) => {
+      console.error("Error: failed submitting the answer", error);
+    })
+  }, [isSubmitted]);
+
 
   return (
     <>
@@ -102,15 +124,15 @@ export default function Quiz() {
             />
 
             <div className="quiz-container quiz-options">
-              <form className="options-container" onSubmit={handleOptionSave}>
+              <form className="options-container">
                 {/* {quizData.Answer.map((answer, index) => (
                   <label key={index} className="options-item">
                     <input
                       type="radio"
                       name="option"
-                      value={`option${index}`}
+                      value={index}
+                      checked={selectedOption === index}
                       style={{ transform: 'scale(1.8)' }}
-                      checked={selectedOption === `option${index}`}
                       onChange={handleOptionChange}
                     />
                     <p>{answer}</p>
@@ -121,9 +143,9 @@ export default function Quiz() {
                   <input
                     type="radio"
                     name="option"
-                    value="option1"
+                    value="1"
+                    checked={selectedOption === 1}
                     style={{ transform: "scale(1.8)" }}
-                    checked={selectedOption === "option1"}
                     onChange={handleOptionChange}
                   />
                   <p>
