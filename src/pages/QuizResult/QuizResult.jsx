@@ -20,7 +20,7 @@ export default function Quiz() {
     QnAlist: [],
     correct_num: 0,
     wrong_num: 0,
-    risk: 1,
+    risk: 0,
     date: "", // string 맞나??
   });
   
