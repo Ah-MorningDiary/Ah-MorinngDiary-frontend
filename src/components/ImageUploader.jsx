@@ -16,26 +16,18 @@ const ImageUploader = ({ onImageUpload }) => {
       //imgURL 로 전달 하기 !
       reader.onload = () => {
         const imageUrl = reader.result;
-        //console.log(file); 파일
-        //console.log(imageUrl); 문자열
         setImage(imageUrl);
         onImageUpload(file); // 실제 파일 객체를 전달
 
         const formData = new FormData();
         formData.append("image", file);
-
-        const data = {
-          context: "오늘은 겁나 피곤한 하루였다!!!!!!",
-          whether: "SUNNY",
-        };
-
         console.log(formData);
 
         // 이미지를 FormData 의 형식으로 보낸다 이때 imageURL을 가져오면된다 response로
         axios
           .post(`${BASE_URL}`, formData)
           .then((response) => {
-            console.log("서버 응답:", response.data);
+            console.log("서버 응답 imgURL:", response.data);
           })
           .catch((error) => {
             console.error("서버 요청 중 오류 발생:", error);
