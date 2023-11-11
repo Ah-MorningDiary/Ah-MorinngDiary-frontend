@@ -1,0 +1,148 @@
+@import '../styles/color.scss';
+@import '../styles/utils.scss';
+@import "../styles/font.scss";
+
+$kakao-btn: url("/img/kakaobtn-img.png");
+
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    margin: 10px 0px;
+}
+
+.btn-default {
+    display: block;
+
+    width: 130px;
+    height: 35px;
+
+    border: 0;
+    border-radius: 12px;
+
+    font-weight: bold;
+    background: none;
+
+    text-decoration: none; 
+    transition: background-color 0.3s; 
+
+    font-family: $font-body;
+
+    &:hover {
+        cursor: pointer;
+        opacity:0.8;
+    }
+}
+
+.btn-social {
+    @include place-center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+
+    &:visited {
+        color: white;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn-primary {
+    background-color: $color-primary;
+    color: $color-white;
+    
+    .text {
+        font-size: $font-size-button;
+    }
+}
+
+.btn-secondary {
+    background-color: $color-secondary;
+    color: $color-white;
+
+    .text {
+        font-size: $font-size-button;
+    }
+}
+
+.btn-circle {
+    width: 80px;
+    height: 80px;
+
+    border: 0;
+    border-radius: 50%;
+    font-size: 2rem;
+
+    color: $color-white;
+    background-color: $color-background;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn-kakao{
+    color: $color-black;
+    background-color: #FEE500;
+    border-radius: 12px;
+    width: 30vw;
+    min-width: 250px;
+    height: 46px;
+
+    @include place-center;
+
+    .text{
+        font-family: 'Noto Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 24px;
+        display: flex;
+        color: $color-black;
+    }
+}
+
+.btn-mic{
+    width: 91px;
+    height: 93px;
+    z-index: 100;
+    border: 0;
+    background: none;
+    &:active {
+        cursor: pointer;
+        opacity:0.5;
+    }
+}
+
+.btn-mic.active .icon-container {
+    color: $color-red; 
+    opacity:0.9;
+}
+
+.icon-container {
+    position: relative;
+     text-align: center;
+    font-size: 2rem;
+    color:$color-gray;
+  }
+  
+  .icon-container img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+.btn-items {
+    width: 100%;
+    display: flex;
+    gap: 3rem;  
+    padding: 0 3rem 2rem 3rem;
+    .btn {
+      flex: 1;  
+      max-width: 100px; 
+    }
+  }
+  
