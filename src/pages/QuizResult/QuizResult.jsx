@@ -25,18 +25,18 @@ export default function Quiz() {
   });
   
   // 위험도 포맷팅 to 스트링
-  let riskToString;
-  switch (quizResultData.risk) {
-    case 0:
-      riskToString = "안심";
-      break;
-    case 1: 
-      riskToString = "보통";
-      break;
-    case 2:
-      riskToString = "위험";
-      break;
-  }
+  // let riskToString;
+  // switch (quizResultData.risk) {
+  //   case 0:
+  //     riskToString = "안심";
+  //     break;
+  //   case 1: 
+  //     riskToString = "보통";
+  //     break;
+  //   case 2:
+  //     riskToString = "위험";
+  //     break;
+  // }
 
   // 날짜 포맷팅
   const [formattedDate, setFormattedDate] = useState("");
@@ -83,17 +83,17 @@ export default function Quiz() {
                 {
                   quizResultData.risk === 0 ? (
                     <span className="quiz-txt risk-low">
-                      {`${riskToString}`}
+                      {`안심`}
                       <FontAwesomeIcon icon={faFaceSmileWink} className="face-icon" />
                     </span>
                   ) : quizResultData.risk === 1 ? (
                     <span className="quiz-txt risk-mid">
-                      {`${riskToString}`}
+                      {`보통`}
                       <FontAwesomeIcon icon={faFaceMeh} className="face-icon" />
                     </span>
                   ) : (
                     <span className="quiz-txt risk-high">
-                      {`${riskToString}`}
+                      {`위험`}
                       <FontAwesomeIcon icon={faFaceTired} className="face-icon" />
                     </span>
                   )
