@@ -7,6 +7,7 @@ import bookBlank_edge from '../../../public/img/bookBlank_edge.png';
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 import { formatDateIntoKorean } from "../../components/formatDateIntoKorean";
+import Risk from "../../components/Risk";
 
 export default function Quiz() {
   const linkHome = "/home";
@@ -72,11 +73,11 @@ export default function Quiz() {
               <p>
                 {`총 10 문항 중 `}
                 <span className="txt-primary">{`${quizResultData.correct_num} 문항`}</span>
-                {`를 맞히셨습니다. `}
+                {`을 맞히셨습니다. `}
               </p>
               <p>
                 {`현재 기억 건강 상태는 `} 
-                <span>{`${riskToString}`}</span>
+                <span className="txt-primary">{`${riskToString}`}<Risk /></span>
                 {`입니다.`}
               </p>
             </div>
