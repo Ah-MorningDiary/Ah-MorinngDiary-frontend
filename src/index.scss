@@ -1,0 +1,35 @@
+@import './styles/color.scss';
+@import './styles/utils.scss';
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: $color-background;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+
+    &:visited {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+}

@@ -1,0 +1,47 @@
+.Container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  
+}
+
+.backGroundImg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  height: 100vh;
+  z-index: -1;
+}
+
+.Error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 5px 5px 5px #687CD5;
+}
+
+.button {
+  border-radius: 20px;
+  border: 3px solid #687CD5;
+  box-shadow: 3px 3px 3px 3px #687CD5;
+  font-size: 0.8rem;
+  background-color: white;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 40px;
+}
+
+.button:hover {
+  transition: all 0.5s;
+  scale: 1.05;
+}

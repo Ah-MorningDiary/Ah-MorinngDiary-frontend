@@ -1,0 +1,12 @@
+@import './styles/color.scss';
+@import './styles/utils.scss';
+
+#root {
+    width: 100%;
+    height: 100%;
+    background-color: $color-background;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
