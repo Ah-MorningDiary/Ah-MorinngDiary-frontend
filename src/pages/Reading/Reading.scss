@@ -1,0 +1,163 @@
+@import '../../styles/color.scss';
+@import '../../styles/utils.scss';
+@import '../../styles/font.scss';
+$bookCoverBlank: url('../../../public/img/bookCoverBlank.png');
+$bookBackground: url('../../../public/img/bookBackground.png');
+
+#root{
+    background-color: $color-background;
+}
+
+/* Calendar */
+.Reading-Calendar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    font-family: 'GowunDodum-Regular';
+
+    .day-Weekday {
+        color: #a4a48e;
+    }
+    .day-Sat {
+        color: #738f82;
+    }
+
+    .day-Sun {
+        color: #c39b82;
+    }
+
+    .Reading-line {
+        margin-bottom: 15px;
+    }
+
+    hr {
+        border-color: #e9edcc;
+        border-style: none;
+        border-radius: 10px;
+        height: 10px;
+        background-color: #e9edcc;
+    }
+    .Reading-date {
+        width: 100%;
+        font-family: $font-body;
+        display: flex;
+        font-size: 3.5rem;
+        font-style: normal;
+        font-weight: 600;
+        color: #a4a48e;
+        justify-content: space-between;
+        li {
+            flex: 1; 
+        }
+    }
+}
+
+.Reading-day {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-family: $font-body;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 600;  
+    .li{
+        gap: 100px;
+        flex: 1;
+    }
+}
+
+/* Diary */
+.Reading-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    max-height: 720px;
+    font-family: 'GowunDodum-Regular';
+}
+
+.Reading-containers{
+    width: 120%;
+}
+
+/* bookCover */
+.Reading-container {
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+    background: $bookCoverBlank;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .Diary-page {
+        position: relative;
+        width: 550px;
+        height: 673px;
+    }
+
+    /* DiaryRight */
+    .Diary-right {
+        flex: 1;
+    }
+
+    /* DiaryLeft */
+    .Diary-left {
+        flex: 1;
+    }
+
+    .Diary-text {
+        position: relative;
+        width: 503px;
+        height: 578px;
+        font-weight: 700;
+        font-size: 75px;
+        line-height: 91px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.016em;
+        color: #000000;
+    }
+
+    /* image 25 */
+    & .image-25 {
+        position: absolute;
+        width: 41px;
+        height: 47px;
+        left: 1940px;
+        top: 1512px;
+        background: url('image.png');
+    }
+}
+
+.Reading-weekCalender{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .li{
+        flex:1;
+    }
+
+}
+
+.btn{
+    font-size: 2rem;
+    color: $color-gray;
+    padding: 1rem;
+}
+
+.day-items {
+    flex: 1; 
+}
