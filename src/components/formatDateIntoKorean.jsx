@@ -4,6 +4,5 @@ export const formatDateIntoKorean = (writeDate) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedDate = dateObject.toLocaleDateString("ko-KR", options);
   console.log(formattedDate);
-
   return formatDateIntoKorean;
 };

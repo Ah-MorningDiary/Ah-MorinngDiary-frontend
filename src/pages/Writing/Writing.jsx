@@ -84,10 +84,10 @@ export default function Writing() {
   };
 
   const handleClickSave = () => {
-    setData({
-      ...data,
-      context: text,
-    });
+    // setData({
+    //   ...data,
+    //   context: text,
+    // });
 
     console.log("Save Data:", data);
 
@@ -110,16 +110,6 @@ export default function Writing() {
       <div className="Writing-wrapper">
         <div className="Writing-container">
           <div className="Writing-item Writing-text">
-            <div className="image-upload-ui">
-              <button
-                onClick={() => {
-                  // Placeholder for future enhancements related to image uploads
-                }}
-              >
-                추가하기
-              </button>
-            </div>
-
             <div>
               <input type="file" id="file" onChange={onImageUpload} />
               {imageURL && (
@@ -152,42 +142,38 @@ export default function Writing() {
           <div className="btn-items btn-group">
             <Button
               type="primary"
-              style={{ fontSize: "1.5rem", width: "100%", height: "50px" }}
+              style={{ fontSize: "1.3rem", width: "100%", height: "50px" }}
               onClick={handleClickSave}
             >
               저장하기
             </Button>
 
             <div className="btn-group">
-              <img
-                src="/img/sunny.png"
-                style={{ width: "80px", height: "80px" }}
+              <button
+                className="weather-btn sunny"
                 onClick={() => handleWeatherChange("SUNNY")}
                 alt="SUNNY"
               />
-              <img
-                src="/img/cloudy.png"
-                style={{ width: "80px", height: "80px" }}
-                onClick={() => handleWeatherChange("CLOUDY")}
-                alt="Cloudy"
+              <button
+                className="weather-btn cloudy"
+                onClick={() => handleWeatherChange("CLODY")}
+                alt="cloudy"
               />
-              <img
-                src="/img/rainy.png"
-                style={{ width: "80px", height: "80px" }}
+              <button
+                className="weather-btn rainy"
                 onClick={() => handleWeatherChange("RAINING")}
-                alt="RAINING"
+                alt="rainy"
               />
-              <img
-                src="/img/snow.png"
-                style={{ width: "80px" }}
+              <button
+                className="weather-btn snow"
                 onClick={() => handleWeatherChange("SNOWING")}
-                alt="SNOWING"
+                alt="snow"
               />
             </div>
 
             <Button
               type="secondary"
-              style={{ fontSize: "1.5rem", width: "100%", height: "50px" }}
+              style={{ fontSize: "1.3rem", width: "100%", height: "50px" }}
               onClick={handleClickErase}
             >
               지우기
