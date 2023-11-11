@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../Quiz/Quiz.scss";
 import HomeButton from "../../components/HomeButton";
 import { Button } from "../../components/Button";
-import { useNavigate, Link } from "react-router-dom";
-import bookBlank_edge from "../../../public/img/bookBlank_edge.png";
+import { useNavigate, Link } from 'react-router-dom';
+import bookBlank_edge from '../../../public/img/bookBlank_edge.png';
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 
@@ -34,6 +34,7 @@ export default function Quiz() {
       });
   }, []);
 
+
   return (
     <>
       <HomeButton />
@@ -46,6 +47,7 @@ export default function Quiz() {
               alt="bookBlank_edge"
               style={{ display: "inline-block", verticalAlign: "bottom" }}
             />
+
 
             <div className="quiz-container quiz-options">
               <p>
