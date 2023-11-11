@@ -41,10 +41,15 @@ export default function Writing() {
   const handleWeatherChange = (newWeather) => {
     setData({
       ...data,
+      context: text,
       whether: newWeather,
     });
     console.log(data);
   };
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const handleClickSave = () => {
     console.log(data);
