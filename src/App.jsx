@@ -6,6 +6,7 @@ import Error from "../src/pages/Error/Error";
 import Reading from "./pages/Reading/Reading";
 import Writing from "./pages/Writing/Writing";
 import Quiz from "../src/pages/Quiz/Quiz";
+import QuizResult from "../src/pages/QuizResult/QuizResult";
 import Chart from "../src/pages/Chart/Chart";
 import { Loader } from "./components/Loader";
 
@@ -21,6 +22,7 @@ export default function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="*" element={<Error />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quiz/result" element={<QuizResult />} />
           <Route path="/chart" element={<Chart />} />
         </Routes>
       </BrowserRouter>
