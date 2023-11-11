@@ -4,10 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
-  faCloud,
-  faSnowflake,
-  faSun,
-  faCloudShowersHeavy,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
@@ -15,19 +11,6 @@ import HomeButton from "../../components/HomeButton";
 import { NotMoveBook } from "../../components/NotMoveBook";
 import { formatDate } from "../../components/formatDate";
 
-const fetchDataFromServer = async (dayFull) => {
-  try {
-    // http://3.39.139.234:8080/dairy/read/2023-11-11
-    console.log(dayFull);
-    const response = await axios.get(`${BASE_URL}/dairy/read/${dayFull}`);
-    const data = response.data;
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.error("Error fetching data from the server", error);
-    throw error;
-  }
-};
 const whetherRendering = (whether) => {
   switch (whether) {
     case "CLOUDY":
@@ -54,12 +37,13 @@ const Reading = () => {
     imgUrl: "/img/bookBackground.png",
     whether: "RAINING", //CLOUDY SNOWING SUNNY RAINING
   });
+
   useEffect(() => {
     // 현재 날짜를 기준으로 일주일치 날짜 계산
     const days = [];
     for (let i = 0; i < 7; i++) {
       const date = new Date(currentDate);
-      date.setDate(currentDate.getDate() + i - currentDate.getDay()); //일요일부터 토요일까지
+      date.setDate(currentDate.getDate() + i - currentDate.getDay());
 
       const nextDay = new Date(date);
       nextDay.setDate(nextDay.getDate() + 1);
@@ -82,23 +66,19 @@ const Reading = () => {
 
   const handleDateClick = async (dayFull) => {
     try {
-      const data = await fetchDataFromServer(dayFull);
-      setDiaryData(data);
+      const response = await axios.get(`${BASE_URL}/dairy/read/${dayFull}`);
+      const data = response.data;
+      setDiaryData({
+        writeDate: data.Date,
+        context: data.context,
+        imgUrl: data.imgUrl,
+        whether: data.whether,
+      });
+      return data;
     } catch (error) {
-      console.error("Error fetching data for the selected date", error);
+      console.error("Error fetching data from the server", error);
+      throw error;
     }
-  };
-
-  const renderDiaryContent = (diaryData) => {
-    return (
-      <>
-        <p>{diaryData.date}</p>
-        <h2>{diaryData.title}</h2>
-        <p>{diaryData.content}</p>
-        <h2>{diaryData.imgUrl}</h2>
-        {/* 추가적인 표시 로직 */}
-      </>
-    );
   };
 
   return (

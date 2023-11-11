@@ -11,6 +11,21 @@ import { BASE_URL, BASE_URL_FRONT, BASE_STT_URL } from "../../utils/URL";
 import { motion, useScroll } from "framer-motion";
 import HomeButton from "../../components/HomeButton";
 
+const whetherRendering = (whether) => {
+  switch (whether) {
+    case "CLOUDY":
+      return <img src="/img/cloudy.png" style={{ width: "80px" }} />;
+    case "SNOWING":
+      return <img src="/img/snow.png" style={{ width: "80px" }} />;
+    case "SUNNY":
+      return <img src="/img/sunny.png" style={{ width: "80px" }} />;
+    case "RAINING":
+      return <img src="/img/rainy.png" style={{ width: "80px" }} />;
+    default:
+      return null; // or a default icon if needed
+  }
+};
+
 export default function Writing() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [text, setText] = useState();
@@ -32,10 +47,17 @@ export default function Writing() {
     setUploadedImage(imageData);
   };
 
-  const data = {
-    context: text,
-    imgUrl: uploadedImage,
+  const [data, setData] = useState({
+    context: "",
+    imgUrl: "",
     whether: "SUNNY",
+  });
+
+  const handleWeatherChange = (newWeather) => {
+    setData({
+      ...data,
+      whether: newWeather,
+    });
   };
 
   const handleClickSave = () => {

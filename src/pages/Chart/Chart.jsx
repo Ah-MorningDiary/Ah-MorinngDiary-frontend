@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import "./Chart.scss";
+import HomeButton from "../../components/HomeButton";
 import { Button } from "../../components/Button";
+import bookBlank_edge from "../../../public/img/bookBlank_edge.png";
+import axios from "axios";
+import { BASE_URL } from "../../utils/URL";
 
 function Chart() {
+  const linkHome = "/home";
+
   return (
     <>
-      <main className="quiz-page">
-        {/* <div>
-              Home
-            </div> */}
+      <HomeButton />
 
-        <section className="quiz-wrapper">
-          {/* Chart1 */}
-          <div className="container question">
-            <h2>첫 번째 차트</h2>
+      <main className="chart-page">
+        <section className="chart-wrapper">
+          <div className="chart-container container1">
             <div className="item">{/* 차트 */}</div>
           </div>
 
-          {/* Chart2 */}
-          <div className="container question">
-            <h2>두 번째 차트</h2>
+          <div className="chart-container container2">
             <div className="item">{/* 차트 */}</div>
           </div>
         </section>
