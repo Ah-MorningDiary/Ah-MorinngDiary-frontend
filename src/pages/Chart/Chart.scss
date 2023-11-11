@@ -1,3 +1,70 @@
-@import "../../styles/color.scss";
-@import "../../styles/utils.scss";
-@import "../Quiz/Quiz.scss";
+@import "../../../src/styles/color.scss";
+@import "../../../src/styles/utils.scss";
+@import "../../../src/styles/font.scss";
+$doromariUrl: url('/img/doromari 1.png');
+$bookBlankUrl: url('/img/bookBlank_content_small.png');
+
+* {
+    font-family: $font-body;
+}
+
+.chart-page {
+    height: 100vh;
+    max-height: 720px;
+
+    .chart-wrapper {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column; 
+        gap: 20px; // quesion과 options 간격
+    
+        @include wrapper-width;
+        height: calc(100vh - 4rem); // button-container 높이와 여백 뺀 값
+        margin: 0px auto;
+
+        overflow: auto; // 스크롤 
+
+        .chart-title {
+            h1 {
+                font-family: $font-title;
+                font-size: $font-size-h;
+                text-align: left;
+            }
+
+            p {
+                font-family: $font-body;
+                font-size: $font-size-p;
+                text-align: left;
+            }
+        }
+
+        .chart-container {
+            height: auto;
+            // @include wrapper-width;
+            @include place-center;
+            flex-direction: column; 
+        }
+
+        .container-doromari {
+            background: $doromariUrl;
+            background-size: 100% 100%; 
+            // min-height: 35%;
+
+            padding-top: 60px;
+            padding-bottom: 60px;
+            padding-left: 120px;
+            padding-right: 60px;
+
+            // margin-bottom: 30px;
+        }
+
+        .container-bookBlank {
+            background: $bookBlankUrl;
+            background-size: 100% 100%; 
+            min-height: 20%;
+
+            padding: 0px 60px;
+        }
+        
+    }
+}

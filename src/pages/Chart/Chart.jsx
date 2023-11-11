@@ -7,21 +7,37 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 
 function Chart() {
-  const linkHome = "/home";
-
   return (
     <>
       <HomeButton />
 
       <main className="chart-page">
         <section className="chart-wrapper">
-          <div className="chart-container container1">
-            <div className="item">{/* 차트 */}</div>
-          </div>
+          <section className='chart-title'>
+            <h1>나의 기억 건강 관리</h1>
+            <p>월별 건강 상태의 추이를 살피고 관리해보세요.</p>
+          </section>
 
-          <div className="chart-container container2">
-            <div className="item">{/* 차트 */}</div>
-          </div>
+          <section>
+            <img
+              src={bookBlank_edge}
+              alt="bookBlank_edge"
+              style={{ display: "inline-block", verticalAlign: "bottom", width: "100%", maxWidth: "1280px", }}
+            />
+            <div className="chart-container container-bookBlank">
+              
+            </div>
+            <img
+              src={bookBlank_edge}
+              alt="bookBlank_edge"
+              style={{ transform: "scaleY(-1)", width: "100%", maxWidth: "1280px", }}
+            />
+          </section>
+
+          {/* <section className="chart-container container-doromari">
+            <div className="item"></div>
+          </section> */}
+
         </section>
       </main>
     </>
