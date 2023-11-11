@@ -61,6 +61,43 @@ export default function Quiz() {
       });
   }, []);
 
+  const QuizQuestion = () => {
+    return (
+      <div className="quiz-container quiz-question">
+        <p>
+          {`${formattedDate} 퀴즈 결과입니다. `}
+        </p>
+        <p>
+          {`총 10 문항 중 `}
+          <span className="quiz-txt txt-primary">{`${quizResultData.correct_num} 문항`}</span>
+          {`을 맞히셨습니다. `}
+        </p>
+        <p >
+          {`현재 기억 건강 상태는 `} 
+          {
+            quizResultData.risk === 0 ? (
+              <span className="quiz-txt risk-low">
+                {`안심`}
+                <FontAwesomeIcon icon={faFaceSmileWink} className="face-icon" />
+              </span>
+            ) : quizResultData.risk === 1 ? (
+              <span className="quiz-txt risk-mid">
+                {`보통`}
+                <FontAwesomeIcon icon={faFaceMeh} className="face-icon" />
+              </span>
+            ) : (
+              <span className="quiz-txt risk-high">
+                {`위험`}
+                <FontAwesomeIcon icon={faFaceTired} className="face-icon" />
+              </span>
+            )
+          }
+          {`입니다.`}
+        </p>
+      </div>
+    );
+  }
+
 
   return (
     <>
@@ -68,40 +105,7 @@ export default function Quiz() {
 
       <main className="quiz-page">
         <section className="quiz-wrapper">
-          {/* <div className="quiz-container1"> */}
-            <div className="quiz-container quiz-question">
-              <p>
-                {`${formattedDate} 퀴즈 결과입니다. `}
-              </p>
-              <p>
-                {`총 10 문항 중 `}
-                <span className="quiz-txt txt-primary">{`${quizResultData.correct_num} 문항`}</span>
-                {`을 맞히셨습니다. `}
-              </p>
-              <p >
-                {`현재 기억 건강 상태는 `} 
-                {
-                  quizResultData.risk === 0 ? (
-                    <span className="quiz-txt risk-low">
-                      {`안심`}
-                      <FontAwesomeIcon icon={faFaceSmileWink} className="face-icon" />
-                    </span>
-                  ) : quizResultData.risk === 1 ? (
-                    <span className="quiz-txt risk-mid">
-                      {`보통`}
-                      <FontAwesomeIcon icon={faFaceMeh} className="face-icon" />
-                    </span>
-                  ) : (
-                    <span className="quiz-txt risk-high">
-                      {`위험`}
-                      <FontAwesomeIcon icon={faFaceTired} className="face-icon" />
-                    </span>
-                  )
-                }
-                {`입니다.`}
-              </p>
-            </div>
-          {/* </div> */}
+          <QuizQuestion />
 
           <div className="quiz-container1">
             <img
