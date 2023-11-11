@@ -9,7 +9,7 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 import HomeButton from "../../components/HomeButton";
 import { NotMoveBook } from "../../components/NotMoveBook";
-import { formatDate } from "../../components/formatDate";
+import { formatDateIntoKorean } from "../../components/formatDateIntoKorean";
 
 const whetherRendering = (whether) => {
   switch (whether) {
@@ -130,7 +130,7 @@ const Reading = () => {
                 {diaryData && whetherRendering(diaryData.whether)}
               </text>
               <text className="Diary-text fl">
-                {diaryData && formatDate(diaryData.writeDate)}
+                {diaryData && formatDateIntoKorean(diaryData.writeDate)}
               </text>
               {diaryData.imgUrl ? (
                 <img className="img" src={diaryData.imgUrl} alt="Diary Image" />
