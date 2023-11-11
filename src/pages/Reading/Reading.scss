@@ -114,19 +114,6 @@ $bookBackground: url('../../../public/img/bookBackground.png');
         flex: 1;
     }
 
-    .Diary-text {
-        position: relative;
-        width: 503px;
-        height: 578px;
-        font-weight: 700;
-        font-size: 75px;
-        line-height: 91px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        letter-spacing: 0.016em;
-        color: #000000;
-    }
 
     /* image 25 */
     & .image-25 {
@@ -138,6 +125,36 @@ $bookBackground: url('../../../public/img/bookBackground.png');
         background: url('image.png');
     }
 }
+
+.Diary-text {
+    position: relative;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 41px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.016em;
+    color: #000000;
+    text-align: left;
+
+    padding: 4rem;
+
+    &-Large{
+        font-size: 40px;
+    }
+}
+
+.fl{
+    padding: 2rem;
+    font-size: 50px;
+}
+
+.whether{
+    font-size: 80px;
+    color: #000000;
+}
+
 
 .Reading-weekCalender{
     width: 100%;

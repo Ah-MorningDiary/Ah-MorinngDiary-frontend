@@ -4,10 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
+  faCloud,
+  faSnowflake,
+  faSun,
+  faCloudShowersHeavy,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 import HomeButton from "../../components/HomeButton";
+import { NotMoveBook } from "../../components/NotMoveBook";
+import { formatDate } from "../../components/formatDate";
 
 const fetchDataFromServer = async (dayFull) => {
   try {
@@ -22,17 +28,32 @@ const fetchDataFromServer = async (dayFull) => {
     throw error;
   }
 };
+const whetherRendering = (whether) => {
+  switch (whether) {
+    case "CLOUDY":
+      return <img src="/img/cloudy.png" style={{ width: "80px" }} />;
+    case "SNOWING":
+      return <img src="/img/snow.png" style={{ width: "80px" }} />;
+    case "SUNNY":
+      return <img src="/img/sunny.png" style={{ width: "80px" }} />;
+    case "RAINING":
+      return <img src="/img/rainy.png" style={{ width: "80px" }} />;
+    default:
+      return null; // or a default icon if needed
+  }
+};
 
 const Reading = () => {
   const [dates, setDates] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date());
+  //일기 보기 더미데이터
   const [diaryData, setDiaryData] = useState({
-    writeDate: "2023-11-11",
-    context: "화이팅!!!!!!",
-    imgUrl: "image.png",
-    whether: "SUNNY",
+    writeDate: "2023-11-01",
+    context:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe repellat odio provident quo repellendus eum sint architecto reprehenderit ipsum, quia facilis magnam possimus doloremque sunt nam? Nisi laborum ad nihil!",
+    imgUrl: "/img/bookBackground.png",
+    whether: "RAINING", //CLOUDY SNOWING SUNNY RAINING
   });
-
   useEffect(() => {
     // 현재 날짜를 기준으로 일주일치 날짜 계산
     const days = [];
@@ -41,9 +62,9 @@ const Reading = () => {
       date.setDate(currentDate.getDate() + i - currentDate.getDay()); //일요일부터 토요일까지
 
       const nextDay = new Date(date);
-      nextDay.setDate(nextDay.getDate() + 1); // Add one day
+      nextDay.setDate(nextDay.getDate() + 1);
       days.push({
-        dayFull: nextDay.toISOString().split("T")[0],
+        dayFull: date.toISOString().split("T")[0],
         dayOfMonth: date.getDate(),
         dayOfWeek: date.getDay(), // 0(일) ~ 6(토)
       });
@@ -71,8 +92,10 @@ const Reading = () => {
   const renderDiaryContent = (diaryData) => {
     return (
       <>
+        <p>{diaryData.date}</p>
         <h2>{diaryData.title}</h2>
         <p>{diaryData.content}</p>
+        <h2>{diaryData.imgUrl}</h2>
         {/* 추가적인 표시 로직 */}
       </>
     );
@@ -119,12 +142,43 @@ const Reading = () => {
         />
       </div>
 
-      <div className="Reading-wrapper">
-        <div className="Reading-container">
-          {/* diaryData가 있을 때만 일기를 표시 */}
-          {diaryData && renderDiaryContent(diaryData)}
-        </div>
-      </div>
+      <NotMoveBook
+        left={
+          <div className={`Diary-left Diary-page`}>
+            <div className="bottom">
+              <text className="Diary-text fl whether">
+                {diaryData && whetherRendering(diaryData.whether)}
+              </text>
+              <text className="Diary-text fl">
+                {diaryData && formatDate(diaryData.writeDate)}
+              </text>
+              {diaryData.imgUrl ? (
+                <img className="img" src={diaryData.imgUrl} alt="Diary Image" />
+              ) : (
+                <img className="img" src="/img/logo.png" alt="Logo" />
+              )}
+            </div>
+          </div>
+        }
+        // mid={
+        //   <div className={`Diary-right Diary-page`}>
+        //     <div className="bottom">
+        //       <text className="Diary-text">
+        //         {diaryData && diaryData.context}
+        //       </text>
+        //     </div>
+        //   </div>
+        // }
+        right={
+          <div className={`Diary-right Diary-page`}>
+            <div className="bottom">
+              <text className="Diary-text">
+                {diaryData && diaryData.context}
+              </text>
+            </div>
+          </div>
+        }
+      />
     </>
   );
 };
