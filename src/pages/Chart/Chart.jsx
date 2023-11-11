@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import "./Chart.scss";
 import HomeButton from "../../components/HomeButton";
 import { Button } from "../../components/Button";
@@ -28,4 +28,4 @@ function Chart() {
   );
 }
 
-export default Chart;
+export default Chart
