@@ -83,6 +83,8 @@ export default function Writing() {
     }
   };
 
+  if (error) return <p>지원이 되지 않는 기종입니다.🤷‍</p>;
+
   const handleClickSave = () => {
     // setData({
     //   ...data,

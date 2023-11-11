@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
   gap:30px;
-  background-color: #edd5bd;
+  //background-color: #edd5bd;
 }
 
 .loader {
@@ -23,6 +23,9 @@
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+}
+.font-title{
+  font-family: $font-title;
 }
 
 @keyframes rotation {
@@ -38,10 +41,13 @@
   font-family: $font-body;
   font-size: 2rem;
 }
+.logo-container{
+  margin-bottom: 150px;
+}
+
 .imglogo{
-  width: 300px;
+  width: 200px;
   display: block;
-  padding-bottom: 100px;
 }
 
 /*
@@ -325,4 +331,20 @@ body {
     transform: translateX(0px) rotateZ(-90deg);
   }
   
+}
+
+/* 모바일 화면에 적용할 스타일 */
+@media screen and (max-width: 767px) {
+  .logo-container{
+
+  }
+
+  .imglogo{
+    width: 100px;
+  }
+  
+
+  .font{
+    font-size: 18px;
+  }
 }
