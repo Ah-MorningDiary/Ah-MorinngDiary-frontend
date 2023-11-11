@@ -33,7 +33,7 @@ const Reading = () => {
   const [diaryData, setDiaryData] = useState({
     writeDate: "2023-11-01",
     context:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe repellat odio provident quo repellendus eum sint architecto reprehenderit ipsum, quia facilis magnam possimus doloremque sunt nam? Nisi laborum ad nihil!",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe repellat odio provident ",
     imgUrl: "/img/bookBackground.png",
     whether: "RAINING", //CLOUDY SNOWING SUNNY RAINING
   });
@@ -66,6 +66,7 @@ const Reading = () => {
 
   const handleDateClick = async (dayFull) => {
     try {
+      console.log(dayFull);
       const response = await axios.get(`${BASE_URL}/dairy/read/${dayFull}`);
       const data = response.data;
       setDiaryData({

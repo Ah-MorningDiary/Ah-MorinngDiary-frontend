@@ -4,6 +4,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/URL";
 import "./ImageUploader.scss";
 
+// 이 함수에 이미지 URL을 만들어야함
 const ImageUploader = ({ onImageUpload }) => {
   const [image, setImage] = useState(null);
 
@@ -12,6 +13,7 @@ const ImageUploader = ({ onImageUpload }) => {
       const file = acceptedFiles[0];
       const reader = new FileReader();
 
+      //imgURL 로 전달 하기 !
       reader.onload = () => {
         const imageUrl = reader.result;
         setImage(imageUrl);
