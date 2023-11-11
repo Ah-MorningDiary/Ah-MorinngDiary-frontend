@@ -42,16 +42,34 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
             p {
                 font-family: $font-body;
                 font-size: $font-size-p;
+
+                white-space: nowrap;
             }
 
-            .txt-primary {
+            .quiz-txt {
                 font-family: $font-body;
                 font-size: 2.1rem; 
                 font-weight: 900;
+
+                .face-icon {
+                    margin: 0 4px;
+                }
             }
 
             .txt-primary {
                 color: $color-primary;
+            }
+
+            .risk-low {
+                color: $color-sky;
+            }
+
+            .risk-mid {
+                color: $color-orange;
+            }
+
+            .risk-high {
+                color: $color-red;
             }
         }
 

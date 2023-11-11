@@ -9,8 +9,11 @@
 
 .risk-circle {
     // 가로 세로 비율 1:1로 고정
-    max-width: 4.4rem; 
-    max-height: 4.4rem;
+    // max-width: 4.4rem; 
+    // max-height: 4.4rem;
+    width: 24%;
+    padding-bottom: 24%;
+    position: relative;
 
     background-color: $color-red;
     border: 1.5px solid $color-gray;
@@ -22,7 +25,7 @@
     // -webkit-text-stroke-width: 0.001px;
     // -webkit-text-stroke-color: black;
 
-    span {
+    .content {
         font-family: $font-body;
         font-weight: 900;
         font-size: 0.9em;

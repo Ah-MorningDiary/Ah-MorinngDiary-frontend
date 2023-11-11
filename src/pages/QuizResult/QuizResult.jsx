@@ -7,7 +7,10 @@ import bookBlank_edge from '../../../public/img/bookBlank_edge.png';
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 import { formatDateIntoKorean } from "../../components/formatDateIntoKorean";
-import Risk from "../../components/Risk";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faFaceSmileWink} from '@fortawesome/free-regular-svg-icons';
+import {faFaceMeh} from '@fortawesome/free-regular-svg-icons';
+import {faFaceTired} from '@fortawesome/free-regular-svg-icons';
 
 export default function Quiz() {
   const linkHome = "/home";
@@ -17,11 +20,11 @@ export default function Quiz() {
     QnAlist: [],
     correct_num: 0,
     wrong_num: 0,
-    risk: 0,
+    risk: 1,
     date: "", // string 맞나??
   });
   
-  // 위험도 포맷팅
+  // 위험도 포맷팅 to 스트링
   let riskToString;
   switch (quizResultData.risk) {
     case 0:
@@ -72,12 +75,29 @@ export default function Quiz() {
               </p>
               <p>
                 {`총 10 문항 중 `}
-                <span className="txt-primary">{`${quizResultData.correct_num} 문항`}</span>
+                <span className="quiz-txt txt-primary">{`${quizResultData.correct_num} 문항`}</span>
                 {`을 맞히셨습니다. `}
               </p>
-              <p>
+              <p >
                 {`현재 기억 건강 상태는 `} 
-                <span className="txt-primary">{`${riskToString}`}<Risk /></span>
+                {
+                  quizResultData.risk === 0 ? (
+                    <span className="quiz-txt risk-low">
+                      {`${riskToString}`}
+                      <FontAwesomeIcon icon={faFaceSmileWink} className="face-icon" />
+                    </span>
+                  ) : quizResultData.risk === 1 ? (
+                    <span className="quiz-txt risk-mid">
+                      {`${riskToString}`}
+                      <FontAwesomeIcon icon={faFaceMeh} className="face-icon" />
+                    </span>
+                  ) : (
+                    <span className="quiz-txt risk-high">
+                      {`${riskToString}`}
+                      <FontAwesomeIcon icon={faFaceTired} className="face-icon" />
+                    </span>
+                  )
+                }
                 {`입니다.`}
               </p>
             </div>
