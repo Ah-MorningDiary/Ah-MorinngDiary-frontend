@@ -1,0 +1,45 @@
+$dropzoneSize: 300px;
+$dropzoneMoblieSize: 100px;
+$dropzoneImageStyle: 100%;
+
+.dropzoneStyle {
+  width: $dropzoneSize;
+  height: $dropzoneSize;
+  border:  2px solid #000000;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.imageStyle {
+  width: $dropzoneImageStyle;
+  height: $dropzoneImageStyle;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.image-uploader {
+  &__dropzone {
+    @extend .dropzoneStyle;
+  }
+
+  &__image {
+    @extend .imageStyle;
+  }
+}
+
+  /* 모바일 화면에 적용할 스타일 */
+  @media screen and (max-width: 767px) {
+    .dropzoneStyle{
+     width: 100%;
+     height: 100%;
+    }
+
+    .imageStyle{
+      width: 100%;
+      height: 100%;
+    }
+
+  }

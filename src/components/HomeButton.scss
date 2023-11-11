@@ -1,0 +1,17 @@
+@import "../../src/styles/color.scss";
+@import "../../src/styles/utils.scss";
+@import "../../src/styles/font.scss";
+
+.house-button {
+    position: absolute;
+    top: 30px; left: 30px; 
+    border: none;
+    font-size: 3.5vw;
+    color: $color-brown;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.house-button:hover {
+    cursor: pointer;
+}

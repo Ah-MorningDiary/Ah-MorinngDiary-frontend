@@ -1,0 +1,113 @@
+@import "../../../src/styles/color.scss";
+@import "../../../src/styles/utils.scss";
+@import "../../../src/styles/font.scss";
+$bookBackgroundUrl: url('/img/bookCoverBlank.png');
+$bookBackgroundwithBookmarkUrl: url('/img/bookBackgroundwithBookmark.png');
+
+
+/* Diary */
+.Diary-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    max-height: 720px;
+    font-family: 'GowunDodum-Regular';
+
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+    /* bookCover */
+.Diary-container {
+      width: 100%;
+      max-width: 1280px;
+      height: 100%;
+      background: $bookBackgroundUrl;
+      background-size: 100% 100%; 
+      background-repeat: no-repeat;
+      background-position: center; 
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; 
+      align-items: center; 
+
+    /* DiaryRight */
+    .Diary-right {
+      flex: 1;
+      
+      //background-color: #F9F9F9;
+      }
+
+    /* DiaryLeft */
+    .Diary-left {
+      flex: 1; 
+      //background-color: #ECD5BD;
+    }
+}
+#pageSection {
+  position: relative;
+  perspective: 1000px;
+}
+
+.Diary-text {
+  font-family: $font-title;
+  position: relative;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 91px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align:center;
+  letter-spacing: 0.016em;
+  color: #000000;
+  vertical-align : bottom;
+  gap: 15px;
+
+  &-Large {
+    font-family: $font-title;
+    font-size: 70px;
+    vertical-align : bottom;
+  }
+  li{
+    font-size: 20px;
+    margin: 0 10px
+  }
+}
+
+.Diary-page{
+  @include place-center;
+  flex-direction: column;
+  position: relative;
+  //min-width: 360px;
+  height: 100%;
+}
+
+.transitioning {
+  
+}
+
+.bottom{
+  position: absolute;
+}
+
+.img{
+    width: 20vw;
+    padding-bottom: 10px;
+}
+
+
+
+  /* 모바일 화면에 적용할 스타일 */
+  @media screen and (max-width: 767px) {
+
+    .Diary-text{
+      display: flex;
+      flex-direction: column;
+      font-size: 30px;
+    }
+
+  }
+  
