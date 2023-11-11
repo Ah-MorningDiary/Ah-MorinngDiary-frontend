@@ -82,7 +82,13 @@ export default function Quiz() {
         <section className="quiz-wrapper">
           <div className="quiz-container quiz-question">
             <p>
-              1. I am문제에요
+              I'm a mess, mess, mess, mess, mess, mess, mess I'm a mess,
+              mess, mess, mess, mess, mess, mess I'm a mess in distress
+              But we're still the best dressed Fearless, say yes, we don't
+              dress to impress 괜찮단다 뭘 해도 거짓말인 걸 난 알아
+              괜찮겠지 뭘 해도 착한 얼굴에 니 말 잘 들을 땐 괜찮지 않아
+              그런 건 내 룰은 나만 정할래 yeah 볼 거야 금지된 걸 Never
+              hold back 더 자유롭게
               {/* {`${quizData.Q_num}. ${quizData.Question}`} */}
             </p>
           </div>
@@ -127,6 +133,19 @@ export default function Quiz() {
                     괜찮겠지 뭘 해도 착한 얼굴에 니 말 잘 들을 땐 괜찮지 않아
                     그런 건 내 룰은 나만 정할래 yeah 볼 거야 금지된 걸 Never
                     hold back 더 자유롭게
+                    Boom, boom, boom 내 심장이 뛰네
+                    
+                    Get it like boom, boom, boom
+                    Get it like boom, boom, boom (boom, boom now)
+                    Boom, boom, boom 내 심장이 뛰네
+                    Get it like boom, boom, boom
+                    Get it like boom, boom, boom (push it)
+                    I wish for what's forbidden
+                    Get it like boom, boom, boom
+                    Get it like boom, boom, boom (push it)
+                    (Oh-oh) I wish for what's forbidden
+                    Get it like boom, boom, boom
+                    Get it like boom, boom, boom (oh-oh)
                   </p>
                 </label>
               </form>

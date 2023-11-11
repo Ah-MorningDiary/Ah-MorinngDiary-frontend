@@ -52,18 +52,15 @@ $kakao-btn: url("/img/kakaobtn-img.png");
     background-color: $color-primary;
     color: $color-white;
     
-    .text {
-        font-size: $font-size-button;
-    }
+    font-size: $font-size-button;
+    
 }
 
 .btn-secondary {
     background-color: $color-secondary;
     color: $color-white;
 
-    .text {
-        font-size: $font-size-button;
-    }
+    font-size: $font-size-button;
 }
 
 .btn-circle {
