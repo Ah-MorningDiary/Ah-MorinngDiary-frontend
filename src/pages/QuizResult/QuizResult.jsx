@@ -17,7 +17,7 @@ export default function Quiz() {
 
   // 받아온 데이터
   const [quizResultData, setQuizResultData] = useState({
-    QnAlist: [],
+    QnAList: [],
     correct_num: 0,
     wrong_num: 0,
     risk: 0,
@@ -45,11 +45,11 @@ export default function Quiz() {
     axios
       .get(`${BASE_URL}/quiz/result`, {})
       .then((response) => {
-        const { list, correct_num, wrong_num, risk, date } = response.data;
+        const { QnAList, correct_num, wrong_num, risk, date } = response.data;
         console.log(
-          `list: ${list}, correct_num: ${correct_num}, wrong_num: ${wrong_num}, risk: ${risk}`
+          `QnAlist: ${QnAList}, correct_num: ${correct_num}, wrong_num: ${wrong_num}, risk: ${risk}`
         );
-        setQuizResultData({ list, correct_num, wrong_num, risk, date });
+        setQuizResultData({ QnAList, correct_num, wrong_num, risk, date });
         
         // 한국식 날짜로 바꿈
         const newFormattedDate = formatDateIntoKorean(date);
@@ -61,63 +61,79 @@ export default function Quiz() {
       });
   }, []);
 
+  const QuizQuestion = () => {
+    return (
+      <div className="quiz-container quiz-question">
+        <p>
+          {`${formattedDate} 퀴즈 결과입니다. `}
+        </p>
+        <p>
+          {`총 10 문항 중 `}
+          <span className="quiz-txt txt-primary">{`${quizResultData.correct_num} 문항`}</span>
+          {`을 맞히셨습니다. `}
+        </p>
+        <p >
+          {`현재 기억 건강 상태는 `} 
+          {
+            quizResultData.risk === 0 ? (
+              <span className="quiz-txt risk-low">
+                {`안심`}
+                <FontAwesomeIcon icon={faFaceSmileWink} className="face-icon" />
+              </span>
+            ) : quizResultData.risk === 1 ? (
+              <span className="quiz-txt risk-mid">
+                {`보통`}
+                <FontAwesomeIcon icon={faFaceMeh} className="face-icon" />
+              </span>
+            ) : (
+              <span className="quiz-txt risk-high">
+                {`위험`}
+                <FontAwesomeIcon icon={faFaceTired} className="face-icon" />
+              </span>
+            )
+          }
+          {`입니다.`}
+        </p>
+      </div>
+    );
+  }
+
+  const ReviewNote = () => {
+    return (
+      <div className="quiz-container1">
+        <img
+          src={bookBlank_edge}
+          alt="bookBlank_edge"
+          style={{ display: "inline-block", verticalAlign: "bottom" }}
+        />
+
+        <div className="quiz-container quiz-options">
+          <div className="quiz-option">
+            {/* List list(Question, answer, 정답, isCorrect) 형식 */}
+            {/* {quizResultData.QnAlist.map((item, index) => (
+              <p key={index}>{item}</p>
+              item['Question']로도 접근 가능
+            ))} */}
+            item
+          </div>
+        </div>
+
+        <img
+          src={bookBlank_edge}
+          alt="bookBlank_edge"
+          style={{ transform: "scaleY(-1)" }}
+        />
+      </div>
+    );
+  }
 
   return (
     <>
       <HomeButton />
-
       <main className="quiz-page">
         <section className="quiz-wrapper">
-          {/* <div className="quiz-container1"> */}
-            <div className="quiz-container quiz-question">
-              <p>
-                {`${formattedDate} 퀴즈 결과입니다. `}
-              </p>
-              <p>
-                {`총 10 문항 중 `}
-                <span className="quiz-txt txt-primary">{`${quizResultData.correct_num} 문항`}</span>
-                {`을 맞히셨습니다. `}
-              </p>
-              <p >
-                {`현재 기억 건강 상태는 `} 
-                {
-                  quizResultData.risk === 0 ? (
-                    <span className="quiz-txt risk-low">
-                      {`안심`}
-                      <FontAwesomeIcon icon={faFaceSmileWink} className="face-icon" />
-                    </span>
-                  ) : quizResultData.risk === 1 ? (
-                    <span className="quiz-txt risk-mid">
-                      {`보통`}
-                      <FontAwesomeIcon icon={faFaceMeh} className="face-icon" />
-                    </span>
-                  ) : (
-                    <span className="quiz-txt risk-high">
-                      {`위험`}
-                      <FontAwesomeIcon icon={faFaceTired} className="face-icon" />
-                    </span>
-                  )
-                }
-                {`입니다.`}
-              </p>
-            </div>
-          {/* </div> */}
-
-          <div className="quiz-container1">
-            <img
-              src={bookBlank_edge}
-              alt="bookBlank_edge"
-              style={{ display: "inline-block", verticalAlign: "bottom" }}
-            />
-
-            <div className="quiz-container quiz-options"></div>
-
-            <img
-              src={bookBlank_edge}
-              alt="bookBlank_edge"
-              style={{ transform: "scaleY(-1)" }}
-            />
-          </div>
+          <QuizQuestion />
+          <ReviewNote />
         </section>
       </main>
     </>
