@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faFaceSmileWink} from '@fortawesome/free-regular-svg-icons';
 import {faFaceMeh} from '@fortawesome/free-regular-svg-icons';
 import {faFaceTired} from '@fortawesome/free-regular-svg-icons';
+// import { Risk } from "../../components/RiskFontAwesome";
 
 export default function Quiz() {
   const linkHome = "/home";
@@ -78,6 +79,7 @@ export default function Quiz() {
             quizResultData.risk === 0 ? (
               <span className="quiz-txt risk-low">
                 {`안심`}
+                {/* <Risk type="0" width="2.2rem" height="2.2rem" /> */}
                 <FontAwesomeIcon icon={faFaceSmileWink} className="face-icon" />
               </span>
             ) : quizResultData.risk === 1 ? (
