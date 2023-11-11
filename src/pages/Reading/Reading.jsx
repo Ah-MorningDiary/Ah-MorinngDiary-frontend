@@ -9,7 +9,7 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 import HomeButton from "../../components/HomeButton";
 import { NotMoveBook } from "../../components/NotMoveBook";
-import { formatDate } from "../../components/formatDate";
+import { formatDateIntoKorean } from "../../components/formatDateIntoKorean";
 
 const whetherRendering = (whether) => {
   switch (whether) {
@@ -76,7 +76,7 @@ const Reading = () => {
       });
       return data;
     } catch (error) {
-      console.error("Error fetching data from the server", error);
+      console.error("서버에러", error);
       throw error;
     }
   };
@@ -130,7 +130,7 @@ const Reading = () => {
                 {diaryData && whetherRendering(diaryData.whether)}
               </text>
               <text className="Diary-text fl">
-                {diaryData && formatDate(diaryData.writeDate)}
+                {diaryData && formatDateIntoKorean(diaryData.writeDate)}
               </text>
               {diaryData.imgUrl ? (
                 <img className="img" src={diaryData.imgUrl} alt="Diary Image" />
@@ -140,16 +140,7 @@ const Reading = () => {
             </div>
           </div>
         }
-        // mid={
-        //   <div className={`Diary-right Diary-page`}>
-        //     <div className="bottom">
-        //       <text className="Diary-text">
-        //         {diaryData && diaryData.context}
-        //       </text>
-        //     </div>
-        //   </div>
-        // }
-        right={
+        mid={
           <div className={`Diary-right Diary-page`}>
             <div className="bottom">
               <text className="Diary-text">
@@ -158,6 +149,15 @@ const Reading = () => {
             </div>
           </div>
         }
+        // right={
+        //   <div className={`Diary-right Diary-page`}>
+        //     <div className="bottom">
+        //       <text className="Diary-text">
+        //         {diaryData && diaryData.context}
+        //       </text>
+        //     </div>
+        //   </div>
+        // }
       />
     </>
   );

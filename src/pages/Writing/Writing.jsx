@@ -4,27 +4,12 @@ import "./Writing.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import ImageUploader from "../../components/ImageUploader";
-import STT from "../../components/STT";
 import useSpeechToText from "react-hook-speech-to-text";
 import axios from "axios";
 import { BASE_URL, BASE_URL_FRONT, BASE_STT_URL } from "../../utils/URL";
 import { motion, useScroll } from "framer-motion";
 import HomeButton from "../../components/HomeButton";
-
-const whetherRendering = (whether) => {
-  switch (whether) {
-    case "CLOUDY":
-      return <img src="/img/cloudy.png" style={{ width: "80px" }} />;
-    case "SNOWING":
-      return <img src="/img/snow.png" style={{ width: "80px" }} />;
-    case "SUNNY":
-      return <img src="/img/sunny.png" style={{ width: "80px" }} />;
-    case "RAINING":
-      return <img src="/img/rainy.png" style={{ width: "80px" }} />;
-    default:
-      return null; // or a default icon if needed
-  }
-};
+import WeatherButton from "../../components/WeatherButton";
 
 export default function Writing() {
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -58,6 +43,7 @@ export default function Writing() {
       ...data,
       whether: newWeather,
     });
+    console.log(data);
   };
 
   const handleClickSave = () => {
@@ -157,6 +143,32 @@ export default function Writing() {
             >
               저장하기
             </Button>
+            <div className="btn-group">
+              <img
+                src="/img/sunny.png"
+                style={{ width: "80px", height: "80px" }}
+                onClick={() => handleWeatherChange("SUNNY")}
+                alt="SUNNY"
+              />
+              <img
+                src="/img/cloudy.png"
+                style={{ width: "80px", height: "80px" }}
+                onClick={() => handleWeatherChange("CLOUDY")}
+                alt="Cloudy"
+              />
+              <img
+                src="/img/rainy.png"
+                style={{ width: "80px", height: "80px" }}
+                onClick={() => handleWeatherChange("RAINING")}
+                alt="RAINING"
+              />
+              <img
+                src="/img/snow.png"
+                style={{ width: "80px" }}
+                onClick={() => handleWeatherChange("SNOWING")}
+                alt="SNOWING"
+              />
+            </div>
             <Button
               type="secondary"
               style={{ fontSize: "1.5rem", width: "100%", height: "50px" }}
