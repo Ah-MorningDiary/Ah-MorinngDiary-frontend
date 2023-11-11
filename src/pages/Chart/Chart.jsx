@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./Chart.scss";
 import HomeButton from "../../components/HomeButton";
 import { Button } from "../../components/Button";
-import bookBlank_edge from '../../../public/img/bookBlank_edge.png';
+import bookBlank_edge from "../../../public/img/bookBlank_edge.png";
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 

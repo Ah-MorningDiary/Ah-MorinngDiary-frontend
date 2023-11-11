@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./Book.scss";
+import "./FlipBook.scss";
 
-export const Book = ({ left, right, mid }) => {
+export const NotMoveBook = ({ left, right, mid }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (page) => {
@@ -36,14 +36,14 @@ export const Book = ({ left, right, mid }) => {
           name="page"
           id="page-1"
           checked={currentPage === 1}
-          onChange={() => handlePageChange(1)}
+          // onChange={() => handlePageChange(1)}
         />
         <input
           type="radio"
           name="page"
           id="page-2"
           checked={currentPage === 2}
-          onChange={() => handlePageChange(2)}
+          // onChange={() => handlePageChange(2)}
         />
 
         {/* 움직이는 페이지 */}

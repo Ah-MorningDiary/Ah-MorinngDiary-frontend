@@ -2,7 +2,7 @@ import "./Home.scss";
 import { useState } from "react";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { Book } from "./Book";
+import { FlipBook } from "../../components/FilpBook";
 
 export default function Home() {
   const linkWriting = "/writing";
@@ -28,7 +28,7 @@ export default function Home() {
     <>
       <main className="Diary-wrapper">
         <section className="Diary-container">
-          <Book
+          <FlipBook
             left={
               <div
                 //Diary-left Diary-page
