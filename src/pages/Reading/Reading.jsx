@@ -143,7 +143,7 @@ const Reading = () => {
   const handleEraseClick = async () => {
     try {
       const response = await axios.delete(
-        `${BASE_URL}/dairy/delete/${currentDate}`
+        `${BASE_URL}/dairy/delete/${selectedDate}`
       );
       console.log("Delete Response:", response.data);
     } catch (error) {
