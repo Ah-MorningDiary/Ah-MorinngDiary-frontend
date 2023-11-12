@@ -87,7 +87,7 @@ export const Loader = () => {
       const newPath = conditionResult ? "/quiz" : "/home";
       navigate(newPath);
     } catch (error) {
-      navigate("/home");
+      navigate("/quiz");
       console.error("API 요청 중 오류 발생:", error);
     }
   };
