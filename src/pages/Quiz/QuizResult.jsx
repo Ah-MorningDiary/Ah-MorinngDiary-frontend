@@ -18,7 +18,7 @@ export default function Quiz() {
 
   // 받아온 데이터
   const [quizResultData, setQuizResultData] = useState({
-    QnAList: [],
+    // QnAList: [],
     correct_num: 0,
     wrong_num: 0,
     date: "", 
@@ -48,11 +48,14 @@ export default function Quiz() {
     axios
       .get(`${BASE_URL}/quiz/result`, {})
       .then((response) => {
-        const { QnAList, correct_num, wrong_num, risk, date } = response.data;
+        // const { QnAList, correct_num, wrong_num, risk, date } = response.data;
+        const { correct_num, wrong_num, risk, date } = response.data;
         console.log(
-          `QnAlist: ${QnAList}, correct_num: ${correct_num}, wrong_num: ${wrong_num}, risk: ${risk}`
+          // `QnAlist: ${QnAList}, correct_num: ${correct_num}, wrong_num: ${wrong_num}, risk: ${risk}`
+          `correct_num: ${correct_num}, wrong_num: ${wrong_num}, risk: ${risk}`
         );
-        setQuizResultData({ QnAList, correct_num, wrong_num, risk, date });
+        // setQuizResultData({ QnAList, correct_num, wrong_num, risk, date });
+        setQuizResultData({ correct_num, wrong_num, risk, date });
         
         // 한국식 날짜로 바꿈
         const newFormattedDate = formatDateIntoKorean(date);
@@ -137,7 +140,7 @@ export default function Quiz() {
       <main className="quiz-page">
         <section className="quiz-wrapper">
           <QuizQuestion />
-          <ReviewNote />
+          {/* <ReviewNote /> */}
           <Link to="/chart" className="button-container">
             <Button
               type={"primary"}
