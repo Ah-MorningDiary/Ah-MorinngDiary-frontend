@@ -255,11 +255,6 @@ body {
     animation: move #{$duration/10}ms linear infinite;
   }
   
-  // &:after {
-  //   top: 400%;
-  //   left: 7.5%;
-  // }
-  
 }
 
 @keyframes move {
@@ -336,16 +331,7 @@ body {
 
 /* 모바일 화면에 적용할 스타일 */
 @media screen and (max-width: 767px) {
-  .logo-container{
-
-  }
-
   .imglogo{
     width: 100px;
-  }
-  
-
-  .font{
-    font-size: 18px;
   }
 }

@@ -134,6 +134,53 @@ $bookBackground: url('../../../public/img/bookBackground.png');
     }
 }
 
+.Diary-editButton{
+    display: block;
+
+    width: 130px;
+    height: 35px;
+
+    border: 0;
+    border-radius: 12px;
+
+    font-weight: bold;
+    background: none;
+
+    text-decoration: none; 
+    transition: background-color 0.3s; 
+
+    font-family: $font-body;
+
+    &:hover {
+        cursor: pointer;
+        opacity:0.8;
+    }
+}
+
+.btn-groups-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 10px 0px;
+
+}
+
+.btn-primary {
+    background-color: $color-primary;
+    color: $color-white;
+    
+    font-size: $font-size-button;
+    
+}
+
+.btn-secondary {
+    background-color: $color-secondary;
+    color: $color-white;
+
+    font-size: $font-size-button;
+}
+
 .Diary-text {
     position: relative;
     font-weight: 700;

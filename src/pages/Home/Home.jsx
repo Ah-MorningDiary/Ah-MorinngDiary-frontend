@@ -64,8 +64,6 @@ export default function Home() {
                   일기
                   <text className="Diary-text-Large">쓰기</text>
                 </text>
-
-                <Button type={"btn-kakko"} color={"black"}></Button>
               </div>
             }
             right={

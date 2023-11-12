@@ -58,7 +58,10 @@ export const Loader = () => {
             이 서비스는 가로모드에 최적화 되어있습니다.
           </text>
 
-          <a href={KAKAO_AUTH_URI}>카카오로 시작하기</a>
+          <a href={KAKAO_AUTH_URI} className="btn-default btn-kakao min-height">
+            <img src="img/kakaobtn-img.png" alt="kakao" />
+            <span className="text"> 카카오 계정으로 로그인</span>
+          </a>
 
           <Button
             type="btn-start"
