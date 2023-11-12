@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../Quiz/Quiz.scss";
 import HomeButton from "../../components/HomeButton";
 import { Button } from "../../components/Button";
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import bookBlank_edge from '../../../public/img/bookBlank_edge.png';
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
@@ -138,6 +138,15 @@ export default function Quiz() {
         <section className="quiz-wrapper">
           <QuizQuestion />
           <ReviewNote />
+          <Link to="/chart" className="button-container">
+            <Button
+              type={"primary"}
+              width={"300px"}
+              height={"50px"}
+            >
+              나의 기억 건강 보러 가기
+            </Button>
+        </Link>
         </section>
       </main>
     </>
