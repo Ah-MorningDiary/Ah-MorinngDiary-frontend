@@ -1,9 +1,10 @@
 import "./Loader.scss";
-import { useEffect } from "react";
+import { useEffect, useHistory } from "react";
 import { motion } from "framer-motion";
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../utils/URL";
 
 const REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY;
 
@@ -28,6 +29,18 @@ export const Loader = () => {
       }
     })();
   }, []);
+
+  const handleButtonClick = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/start`);
+      const conditionResult = response.data; // 가정
+      const newPath = conditionResult ? "/quiz" : "/home";
+      navigate(newPath);
+    } catch (error) {
+      navigate("/home");
+      console.error("API 요청 중 오류 발생:", error);
+    }
+  };
 
   return (
     <div className="loader-background">
@@ -68,6 +81,7 @@ export const Loader = () => {
             width={"300px"}
             fontSize={"26px"}
             height={"50px"}
+            onClick={handleButtonClick}
           >
             시작하기
           </Button>
