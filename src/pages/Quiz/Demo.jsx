@@ -15,12 +15,6 @@ export default function Quiz() {
   const [selectedOption, setSelectedOption] = useState(0);
   const [answerList, setAnswerList] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [quizData, setQuizData] = useState({
-    type: "",
-    question: "",
-    options: [],
-  });
-  const [numOfGet, setNumOfGet] = useState(0);
 
   const handleOptionChange = (value) => {
     setSelectedOption(value);
@@ -36,7 +30,7 @@ export default function Quiz() {
   const handleBackward = () => {
     console.log("Moved backward");
     setQuestionNum(questionNum - 1);
-    setIsSubmitted(false); // 뒤로 돌아갈 때 제출 여부 초기화
+    // 돌아오면 다시 마운트되는데.. 다시 랜덤으로 질문 받아오나?
   };
 
   const handleSubmit = () => {
@@ -47,18 +41,33 @@ export default function Quiz() {
   const handleForward = () => {
     if (questionNum < numOfQuestions) {
       setQuestionNum(questionNum + 1);
-      setIsSubmitted(false); // 다음 문제로 넘어갈 때 제출 여부 초기화
     }
 
+    // questionNum, 선택한 답을 배열에 저장 -> 나중에 POST 요청의 params로 전달
     setAnswerList((prevOptions) => [
       ...prevOptions,
       { num: questionNum, answer: selectedOption },
     ]);
   };
 
+  // 퀴즈 받아오는 GET 요청
+  // date는 'YYYY-MM-DD' 형식으로 변환
+  // let date = new Date();
+  // date.setDate(date.getDate());
+  // const newDate = date.toISOString().split("T")[0];
   const paramsToGetQuiz = {
+    // date: newDate,
     num: questionNum,
   };
+
+  // 받아온 데이터
+  const [quizData, setQuizData] = useState({
+    type: "",
+    question: "",
+    options: [],
+  });
+
+  const [numOfGet, setNumOfGet] = useState(0); // GET 받아온 횟수
 
   useEffect(() => {
     console.log(`Question Number: ${questionNum}`);
@@ -76,28 +85,32 @@ export default function Quiz() {
       .catch((error) => {
         console.error("Error: failed fetching the quiz", error);
       });
-  }, [questionNum, isSubmitted]);
+  }, [questionNum + 1]);
 
+  // 제출 POST 요청
   const paramsToSubmit = {
     answerList: answerList,
   };
 
   useEffect(() => {
-    if (isSubmitted) {
-      axios
-        .post(`${BASE_URL}/quiz/submit`, paramsToSubmit)
-        .then((response) => {
-          console.log("Submitted successfully");
-        })
-        .catch((error) => {
-          console.error("Error: failed submitting the answer", error);
-        });
-    }
+    axios
+      .post(`${BASE_URL}/quiz/submit`, { paramsToSubmit })
+      .then((response) => {
+        console.log("Submitted uccessfully");
+      })
+      .catch((error) => {
+        console.error("Error: failed submitting the answer", error);
+      });
   }, [isSubmitted]);
 
+  // 함수 추가
   const isImageQuestion = (question) => {
-    const imageExtensions = ["png", "jpg", "jpeg", "gif"];
+    const imageExtensions = ["png", "jpg", "jpeg", "gif"]; // 이미지로 처리할 확장자 목록
+
+    // URL에서 확장자 추출
     const extension = question.split(".").pop().toLowerCase();
+
+    // 이미지로 처리할 확장자인지 확인
     return imageExtensions.includes(extension);
   };
 
@@ -108,18 +121,14 @@ export default function Quiz() {
       <main className="quiz-page">
         <section className="quiz-wrapper">
           <div className="quiz-container quiz-question">
-            {quizData.question ? (
-              isImageQuestion(quizData.question) ? (
-                <img
-                  src={quizData.question}
-                  alt={`Question ${questionNum}`}
-                  className="question-img"
-                />
-              ) : (
-                <p>{`${questionNum}. ${numOfGet}. ${quizData.question}`}</p>
-              )
+            {isImageQuestion(quizData.question) ? (
+              <img
+                src={quizData.question}
+                alt={`Question ${questionNum}`}
+                className="question-img"
+              />
             ) : (
-              <p>문제를 가져오는 중입니다...</p>
+              <p>{`${questionNum}. ${numOfGet}. ${quizData.question}`}</p>
             )}
           </div>
 
@@ -129,6 +138,7 @@ export default function Quiz() {
               alt="bookBlank_edge"
               style={{ display: "inline-block", verticalAlign: "bottom" }}
             />
+            {/* 가져온 퀴즈 데이터 렌더링 */}
             <div className="quiz-container quiz-options">
               <form className="options-container">
                 {quizData.options.map((option, index) => (
