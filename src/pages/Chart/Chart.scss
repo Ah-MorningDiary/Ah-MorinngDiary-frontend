@@ -58,6 +58,7 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
                     p {
                         font-family: $font-body;
                         font-size: $font-size-small;
+                        font-weight: 900;
                     }
                 }
 
@@ -76,7 +77,7 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
         }
 
         .chart-container {
-            height: auto;
+            height: 70px;
             // @include wrapper-width;
             @include place-center;
             

@@ -17,12 +17,14 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
+import Chart from 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-function Chart() {
+function ChartPage() {
   const Title = ( { title, content } ) => {
     return (
       <section className='chart-title'>
@@ -58,8 +60,9 @@ function Chart() {
   const [chartData, setChartData] = useState({ riskChanges: [], riskNums: [] });
 
   useEffect(() => {
+    // console.log(`current month: `, month); // 월 테스트용
     axios
-      .get(`${BASE_URL}/chart`, { params })
+      .get(`${BASE_URL}/chart/${month}`, { params })
       .then((response) => {
         const { riskChanges, riskNums } = response.data;
         // 한 달 간 날짜별 위험도
@@ -131,6 +134,68 @@ function Chart() {
   }
 
   //
+  const BarChart = () => {
+    const data = {
+      labels: ['위험도별 건수'],
+      datasets: [
+        {
+          label: '위험도별 건수',
+          data: [1],
+          backgroundColor: '#EDEDED',
+          // borderWidth: 100,
+          borderRadius: 100, // 모서리 둥글게 처리
+          // borderRadius: { topLeft: 10, topRight: 10, bottomLeft: 10, bottomRight: 10 }, // 각 모서리별로 다르게 
+        },
+        {
+          label: '위험도별 건수',
+          data: [10],
+          backgroundColor: '#AED4E5',
+        },
+        {
+          label: '위험도별 건수',
+          data: [10],
+          backgroundColor: '#F6BF7E',
+        },
+        {
+          label: '위험도별 건수',
+          data: [9],
+          backgroundColor: '#DF6045',
+        },
+      ],
+    };
+
+    const options = {
+      indexAxis: 'y', // y축을 기준
+      scales: {
+        x: {
+          max: 30, // 30일로 지정
+          stacked: true, // x 축을 기준으로 쌓기
+          display: false,
+        },
+        y: {
+          stacked: true, // y 축을 기준으로 쌓기
+          display: false,
+        },
+      },
+      plugins: {
+        legend: {
+          display: false, // 범례 숨기기
+        }, 
+        datalabels: {
+          color: '#FFFFFF', // 라벨 색상
+          align: 'center', // 라벨 위치
+          anchor: 'end', // 라벨 기준점
+          formatter: (value, context) => {
+            return value + '%';
+          },
+        },
+      },
+      maintainAspectRatio: false, // 가로 세로 비율 유지 안 함
+    };
+
+    return <Bar data={data} options={options} />;
+  };
+
   const ContainerRiskNums = () => {
     return (
       <>
@@ -141,8 +206,7 @@ function Chart() {
             style={{ display: "inline-block", verticalAlign: "bottom", width: "100%", maxWidth: "1280px", }}
           />
           <div className="chart-container container-bookBlank">
-
-
+            <BarChart />
           </div>
           <img
             src={bookBlank_edge}
@@ -171,4 +235,4 @@ function Chart() {
   );
 }
 
-export default Chart
+export default ChartPage

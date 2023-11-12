@@ -9,7 +9,7 @@ import '../styles/color.scss';
 export const RiskExamples = () => {
   return (
     <div className="risk-examples">
-      <div className='risk-examples-item risk-high'>
+      <div className='risk-examples-item risk-low'>
         <FontAwesomeIcon icon={faFaceSmileWink} style={{ width: "2.8rem", height: "2.8rem", }} />
         <p>안심</p>
       </div>
@@ -17,7 +17,7 @@ export const RiskExamples = () => {
         <FontAwesomeIcon icon={faFaceMeh} style={{ width: "2.8rem", height: "2.8rem", }} />
         <p>보통</p>
       </div>
-      <div className='risk-examples-item risk-low'>
+      <div className='risk-examples-item risk-high'>
         <FontAwesomeIcon icon={faFaceTired} style={{ width: "2.8rem", height: "2.8rem", }} />
         <p>위험</p>
       </div>

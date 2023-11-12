@@ -7,7 +7,7 @@ import Reading from "./pages/Reading/Reading";
 import Writing from "./pages/Writing/Writing";
 import Quiz from "../src/pages/Quiz/Quiz";
 import QuizResult from "../src/pages/Quiz/QuizResult";
-import Chart from "../src/pages/Chart/Chart";
+import ChartPage from "../src/pages/Chart/ChartPage";
 import { Loader } from "./components/Loader";
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
           <Route path="*" element={<Error />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/quiz/result" element={<QuizResult />} />
-          <Route path="/chart" element={<Chart />} />
+          <Route path="/chart" element={<ChartPage />} />
         </Routes>
       </BrowserRouter>
     </>
