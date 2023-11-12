@@ -20,9 +20,9 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
         gap: 20px; // quesion과 options 간격
     
         width: 100%;
-        height: calc(100vh - 110px); // 95...대충 끼워맞춤.. button-container 빼고 여백 빼고...
+        height: calc(100vh - 140px); // 여백이랑 button-container 높이 빼고
         margin: 0px auto;
-        padding: 30px;
+        // padding: 30px;
 
         // 스크롤 
         overflow: auto; 
@@ -46,7 +46,7 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
 
             .quiz-txt {
                 font-family: $font-body;
-                font-size: 2.1rem; 
+                font-size: $font-size-bigger; 
                 font-weight: 900;
 
                 .face-icon {
@@ -120,7 +120,7 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
         display: flex;
         justify-content: space-between;
 
-        margin-top: 
+        padding-top: 20px;
 
         Button {
             font-family: $font-body;

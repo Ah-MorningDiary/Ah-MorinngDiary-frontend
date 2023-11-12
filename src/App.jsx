@@ -6,7 +6,7 @@ import Error from "../src/pages/Error/Error";
 import Reading from "./pages/Reading/Reading";
 import Writing from "./pages/Writing/Writing";
 import Quiz from "../src/pages/Quiz/Quiz";
-import QuizResult from "../src/pages/QuizResult/QuizResult";
+import QuizResult from "../src/pages/Quiz/QuizResult";
 import Chart from "../src/pages/Chart/Chart";
 import { Loader } from "./components/Loader";
 import First from "../src/pages/Writing/First";
