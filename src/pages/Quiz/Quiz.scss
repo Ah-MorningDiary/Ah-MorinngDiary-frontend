@@ -370,10 +370,19 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
     
 }
   
+.question-img{
+    width: 50%;
+    height: auto;
+    min-width: 240px;
+}
   
 /** 모바일 화면 */
 @media screen and (max-width: 480px) {
     .house-button {
         font-size: 24px; 
+    }
+
+    .question-img{
+    
     }
 }
