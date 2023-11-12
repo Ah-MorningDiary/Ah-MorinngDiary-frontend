@@ -93,7 +93,7 @@ export default function Writing() {
     setIsRecording(!isRecording);
   };
 
-  if (error) return <p>지원이 되지 않는 기종입니다.🤷‍</p>;
+  //if (error) return <p>지원이 되지 않는 기종입니다.🤷‍</p>;
 
   const handleClickSave = async () => {
     console.log("서버로 보내는 Data:", data);
