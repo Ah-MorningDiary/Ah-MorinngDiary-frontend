@@ -43,7 +43,7 @@ export default function Writing() {
     setImage(imageUrl);
     setData({
       ...data,
-      imgUrl: imageUrl,
+      imgUrl: image,
     });
     console.log(image, "image");
   };
