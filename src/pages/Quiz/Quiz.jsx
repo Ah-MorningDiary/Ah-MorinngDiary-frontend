@@ -20,7 +20,12 @@ export default function Quiz() {
     event.preventDefault();
     setSelectedOption(parseInt(event.target.value));
 
-    console.log("You have selected option No. ", selectedOption, "on question No. ", questionNum);
+    console.log(
+      "You have selected option No. ",
+      selectedOption,
+      "on question No. ",
+      questionNum
+    );
 
     // 다시 돌아오면 고칠 수 있도록
   };
@@ -33,7 +38,7 @@ export default function Quiz() {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
-    navigate(linkQuizResult); 
+    navigate(linkQuizResult);
   };
 
   const handleForward = () => {
@@ -42,7 +47,11 @@ export default function Quiz() {
     }
 
     // questionNum, 선택한 답을 배열에 저장 -> 나중에 POST 요청의 params로 전달
-    setAnswerList(prevOptions => [...prevOptions, { num: questionNum, answer: selectedOption }]);
+    setAnswerList((prevOptions) => [
+      ...prevOptions,
+      { num: questionNum, answer: selectedOption },
+    ]);
+
   };
 
   // 퀴즈 받아오는 GET 요청
@@ -82,7 +91,6 @@ export default function Quiz() {
       });
   }, [questionNum + 1]);
 
-
   // 제출 POST 요청
   const paramsToSubmit = {
     answerList: answerList,
@@ -90,15 +98,14 @@ export default function Quiz() {
 
   useEffect(() => {
     axios
-    .post(`${BASE_URL}/quiz/submit`, { paramsToSubmit })
-    .then((response) => {
-      console.log("Submitted uccessfully");
-    })
-    .catch((error) => {
-      console.error("Error: failed submitting the answer", error);
-    })
+      .post(`${BASE_URL}/quiz/submit`, { paramsToSubmit })
+      .then((response) => {
+        console.log("Submitted uccessfully");
+      })
+      .catch((error) => {
+        console.error("Error: failed submitting the answer", error);
+      });
   }, [isSubmitted]);
-
 
   return (
     <>
@@ -107,9 +114,7 @@ export default function Quiz() {
       <main className="quiz-page">
         <section className="quiz-wrapper">
           <div className="quiz-container quiz-question">
-            <p>
-              {`${questionNum}. ${numOfGet}. ${quizData.question}`}
-            </p>
+            <p>{`${questionNum}. ${numOfGet}. ${quizData.question}`}</p>
           </div>
 
           <div className="quiz-container1">
@@ -118,7 +123,6 @@ export default function Quiz() {
               alt="bookBlank_edge"
               style={{ display: "inline-block", verticalAlign: "bottom" }}
             />
-            
             {/* 가져온 퀴즈 데이터 렌더링 */}
             <div className="quiz-container quiz-options">
               <form className="options-container">
@@ -129,7 +133,7 @@ export default function Quiz() {
                       name="option"
                       value={index}
                       checked={selectedOption === index}
-                      style={{ transform: 'scale(1.8)' }}
+                      style={{ transform: "scale(1.8)" }}
                       onChange={handleOptionChange}
                     />
                     <p>{option}</p>

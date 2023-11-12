@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "./Chart.scss";
 import HomeButton from "../../components/HomeButton";
 import { Button } from "../../components/Button";
@@ -18,19 +18,20 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+
 
 function Chart() {
-  const Title = ( { title, content } ) => {
+  const Title = ({ title, content }) => {
     return (
-      <section className='chart-title'>
+      <section className="chart-title">
         <h1>{title}</h1>
         <p>{content}</p>
       </section>
     );
-  }
+  };
 
   // const ContainerDoromari = () => {
   //   return (
@@ -38,8 +39,7 @@ function Chart() {
   //       <div className="item"></div>
   //     </section>
   //   );
-  // }
-  
+
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1; // getMonth()는 0부터 시작
   const [month, setMonth] = useState(currentMonth);
@@ -48,7 +48,6 @@ function Chart() {
     event.preventDefault();
     setMonth(event.target.value);
     console.log("You have selected ", month);
-  }
 
   // 차트 생성을 위한 데이터 GET 요청
   const params = {
@@ -85,33 +84,44 @@ function Chart() {
           <img
             src={bookBlank_edge}
             alt="bookBlank_edge"
-            style={{ display: "inline-block", verticalAlign: "bottom", width: "100%", maxWidth: "1280px", }}
+            style={{
+              display: "inline-block",
+              verticalAlign: "bottom",
+              width: "100%",
+              maxWidth: "1280px",
+            }}
           />
           <div className="chart-container container-bookBlank">
             <button>
-              <FontAwesomeIcon icon={faChevronLeft} style={{ width: "2.5rem", height: "2.5rem", }}/>
+              <FontAwesomeIcon
+                icon={faChevronLeft}
+                style={{ width: "2.5rem", height: "2.5rem" }}
+              />
             </button>
             {/* 차트 내용 */}
-            <div className='chart-risk-changes'>
-
-            </div>
+            <div className="chart-risk-changes"></div>
             <button>
-              <FontAwesomeIcon icon={faChevronRight} style={{ width: "2.5rem", height: "2.5rem", }}/>
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                style={{ width: "2.5rem", height: "2.5rem" }}
+              />
             </button>
           </div>
           <img
             src={bookBlank_edge}
             alt="bookBlank_edge"
-            style={{ transform: "scaleY(-1)", width: "100%", maxWidth: "1280px", }}
+            style={{
+              transform: "scaleY(-1)",
+              width: "100%",
+              maxWidth: "1280px",
+            }}
           />
         </section>
 
         <div className="bookmark-month">
           <img src={greenBookMark} />
-          <select
-            value={month}
-            onChange={handleMonthChange}
-          >
+          <select value={month} onChange={handleMonthChange}>
+
             <option value="1">1월</option>
             <option value="2">2월</option>
             <option value="3">3월</option>
@@ -128,7 +138,7 @@ function Chart() {
         </div>
       </>
     );
-  }
+  };
 
   //
   const ContainerRiskNums = () => {
@@ -138,21 +148,27 @@ function Chart() {
           <img
             src={bookBlank_edge}
             alt="bookBlank_edge"
-            style={{ display: "inline-block", verticalAlign: "bottom", width: "100%", maxWidth: "1280px", }}
+            style={{
+              display: "inline-block",
+              verticalAlign: "bottom",
+              width: "100%",
+              maxWidth: "1280px",
+            }}
           />
-          <div className="chart-container container-bookBlank">
-
-
-          </div>
+          <div className="chart-container container-bookBlank"></div>
           <img
             src={bookBlank_edge}
             alt="bookBlank_edge"
-            style={{ transform: "scaleY(-1)", width: "100%", maxWidth: "1280px", }}
+            style={{
+              transform: "scaleY(-1)",
+              width: "100%",
+              maxWidth: "1280px",
+            }}
           />
         </section>
       </>
     );
-  }
+  };
 
   return (
     <>
@@ -160,7 +176,10 @@ function Chart() {
       <main className="chart-page">
         <section className="chart-wrapper">
           <div className="title-wrapper">
-            <Title title="나의 기억 건강 관리" content="월별 건강 상태의 추이를 살피고 관리해보세요." />
+            <Title
+              title="나의 기억 건강 관리"
+              content="월별 건강 상태의 추이를 살피고 관리해보세요."
+            />
             <RiskExamples />
           </div>
           <ContainerRiskChanges />
@@ -171,4 +190,4 @@ function Chart() {
   );
 }
 
-export default Chart
+export default Chart;

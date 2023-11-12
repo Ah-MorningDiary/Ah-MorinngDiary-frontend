@@ -1,37 +1,27 @@
+// ImageUploader.jsx
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import axios from "axios";
-import { BASE_URL } from "../utils/URL";
 import "./ImageUploader.scss";
 
-// 이 함수에 이미지 URL을 만들어야함
 const ImageUploader = ({ onImageUpload }) => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState();
 
-  const onDrop = (acceptedFiles) => {
+  const onDrop = async (acceptedFiles) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       const file = acceptedFiles[0];
       const reader = new FileReader();
 
-      //imgURL 로 전달 하기 !
       reader.onload = () => {
         const imageUrl = reader.result;
         setImage(imageUrl);
-        onImageUpload(file); // 실제 파일 객체를 전달
+        onImageUpload(imageUrl); // 이미지 파일과 URL을 상위 컴포넌트로 전달
 
+        // FormData 생성
         const formData = new FormData();
         formData.append("image", file);
-        console.log(formData);
 
-        // 이미지를 FormData 의 형식으로 보낸다 이때 imageURL을 가져오면된다 response로
-        axios
-          .post(`${BASE_URL}`, formData)
-          .then((response) => {
-            console.log("서버 응답 imgURL:", response.data);
-          })
-          .catch((error) => {
-            console.error("서버 요청 중 오류 발생:", error);
-          });
+        // 상위 컴포넌트로 전달하는 console
+        console.log("FormData for Server:", imageUrl);
       };
 
       reader.readAsDataURL(file);
