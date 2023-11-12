@@ -10,6 +10,7 @@ import { BASE_URL } from "../../utils/URL";
 import HomeButton from "../../components/HomeButton";
 import { NotMoveBook } from "../../components/NotMoveBook";
 import { formatDateIntoKorean } from "../../components/formatDateIntoKorean";
+import { Button } from "../../components/Button";
 
 const whetherRendering = (whether) => {
   switch (whether) {
@@ -117,8 +118,9 @@ const Reading = () => {
   // 수정하기
   const handleSaveClick = async () => {
     try {
+      console.log(selectedDate, "selectedDate");
       // 수정된 텍스트, imgUrl, whether를 서버로 전송
-      await axios.put(`${BASE_URL}/dairy/update/${currentDate}`, {
+      await axios.put(`${BASE_URL}/dairy/update/${selectedDate}`, {
         context: editingText,
         imgUrl: editingImgUrl,
         whether: editingWhether,
@@ -149,6 +151,13 @@ const Reading = () => {
     } catch (error) {
       console.error("Error deleting data:", error);
     }
+  };
+
+  const handleWeatherChange = (newWeather) => {
+    setData({
+      ...data,
+      whether: newWeather,
+    });
   };
 
   return (
@@ -242,27 +251,55 @@ const Reading = () => {
       {isModalOpen && (
         <div className="Modal">
           <div className="Modal-content">
+            <label htmlFor="editingText">내용 수정하기</label>
             <textarea
+              id="editingText"
               className="Diary-textarea"
               value={editingText}
               onChange={(e) => setEditingText(e.target.value)}
             />
+
+            <label htmlFor="editingImgUrl">이미지 추가하기</label>
             <input
+              id="editingImgUrl"
               type="text"
               value={editingImgUrl}
               onChange={(e) => setEditingImgUrl(e.target.value)}
             />
-            <input
-              type="text"
-              value={editingWhether}
-              onChange={(e) => setEditingWhether(e.target.value)}
-            />
-            <button className="Modal-saveButton" onClick={handleSaveClick}>
-              저장하기
-            </button>
-            <button className="Modal-closeButton" onClick={handleModalClose}>
-              닫기
-            </button>
+
+            <label htmlFor="editingWhether">날씨 수정하기</label>
+
+            <div className="btn-groups-center">
+              <button
+                className="weather-btn sunny"
+                onClick={() => setEditingWhether("SUNNY")}
+                alt="SUNNY"
+              />
+              <button
+                className="weather-btn cloudy"
+                onClick={() => setEditingWhether("CLODY")}
+                alt="cloudy"
+              />
+              <button
+                className="weather-btn rainy"
+                onClick={() => setEditingWhether("RAINING")}
+                alt="rainy"
+              />
+              <button
+                className="weather-btn snow"
+                onClick={() => setEditingWhether("SNOWING")}
+                alt="snow"
+              />
+            </div>
+
+            <div className="btn-groups-center">
+              <Button type="primary" onClick={handleSaveClick}>
+                저장하기
+              </Button>
+              <Button type="secondary" onClick={handleModalClose}>
+                닫기
+              </Button>
+            </div>
           </div>
         </div>
       )}

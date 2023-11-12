@@ -89,10 +89,6 @@ export default function Writing() {
 
     try {
       const res = await axios.post(`${BASE_URL}/dairy/create`, data);
-      // const response = await axios.post(`${BASE_URL}/dairy/create`, {
-      //   data,
-      // });
-
       console.log("서버 응답:", res.data);
     } catch (error) {
       console.error("서버 요청 중 오류 발생:", error);
