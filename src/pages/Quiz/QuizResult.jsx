@@ -142,7 +142,7 @@ export default function Quiz() {
         <section className="quizresult-wrapper">
           <QuizQuestion />
           {/* <ReviewNote /> */}
-          <Link to="/chart" className="button-container">
+          <Link to="/chart" className="quizresult-button-container">
             <Button
               type={"primary"}
               width={"300px"}
