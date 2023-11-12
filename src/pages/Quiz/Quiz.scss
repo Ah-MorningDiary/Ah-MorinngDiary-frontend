@@ -12,7 +12,7 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
 .quiz-page {
     height: 100vh;
     max-height: 720px;
-
+    
     .quiz-wrapper {
         box-sizing: border-box;
         display: flex;
@@ -46,7 +46,109 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
 
             .quiz-txt {
                 font-family: $font-body;
-                font-size: $font-size-bigger; 
+                font-size: 2.1rem; 
+                font-weight: 900;
+
+                .face-icon {
+                    margin: 0 4px;
+                }
+            }
+
+            .txt-primary {
+                color: $color-primary;
+            }
+
+            .risk-low {
+                color: $color-sky-font;
+            }
+
+            .risk-mid {
+                color: $color-orange-font;
+            }
+
+            .risk-high {
+                color: $color-red-font;
+            }
+        }
+
+        .quiz-question {
+            background: $doromariUrl;
+            background-size: 100% 100%; 
+            // min-height: 35%;
+
+            padding-top: 60px;
+            padding-bottom: 60px;
+            padding-left: 120px;
+            padding-right: 60px;
+
+            // margin-bottom: 30px;
+        }
+
+        .quiz-container1 img {
+            @include wrapper-width;
+        }
+
+        .quiz-options {
+            background: $bookBlankUrl;
+            background-size: 100% 100%; 
+            min-height: 20%;
+
+            padding: 0px 60px;
+
+            .options-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                width: 100%;
+                
+                .options-item {
+                    font-family: $font-body;
+                    font-size: 1.6em;
+
+                    @include place-left;
+                    gap: 22px; // input radio랑 텍스트 간격
+
+                    p {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+
+    .quizresult-wrapper {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column; 
+    
+        width: 100%;
+        height: 100%; 
+        margin: 0px auto;
+        // padding: 30px;
+
+        // 스크롤 
+        overflow: auto; 
+    
+        .quiz-container {
+            height: auto;
+            @include wrapper-width;
+            @include place-center;
+            flex-direction: column; 
+
+            // border: 1px solid $color-primary;
+            
+            h2 {
+                color: $color-primary;
+            }
+
+            p {
+                font-family: $font-body;
+                font-size: $font-size-p;
+            }
+
+            .quiz-txt {
+                font-family: $font-body;
+                font-size: 2.1rem; 
                 font-weight: 900;
 
                 .face-icon {

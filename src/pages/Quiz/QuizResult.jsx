@@ -139,7 +139,7 @@ export default function Quiz() {
     <>
       <HomeButton />
       <main className="quiz-page">
-        <section className="quiz-wrapper">
+        <section className="quizresult-wrapper">
           <QuizQuestion />
           {/* <ReviewNote /> */}
           <Link to="/chart" className="button-container">
