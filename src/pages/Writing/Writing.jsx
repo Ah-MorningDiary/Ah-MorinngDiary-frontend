@@ -23,19 +23,19 @@ export default function Writing() {
   const [data, setData] = useState({
     context: "",
     imgUrl: "",
-    weather: "",
+    whether: "",
   });
-
-  const handleWeatherChange = (newWeather) => {
-    setData({
-      ...data,
-      weather: newWeather,
-    });
-  };
 
   useEffect(() => {
     console.log(data);
   }, [data]);
+
+  const handleWeatherChange = (newWeather) => {
+    setData({
+      ...data,
+      whether: newWeather,
+    });
+  };
 
   const fileInput = useRef([]);
 
@@ -65,15 +65,17 @@ export default function Writing() {
 
   useEffect(() => {
     const updatedText = results.map((result) => result.transcript).join("");
-    handleRecordingChange(updatedText);
+    setData({
+      ...data,
+      context: updatedText,
+    });
   }, [results]);
 
   const handleClickErase = () => {
-    setText((prevText) => prevText.slice(0, -1));
-  };
-
-  const handleRecordingChange = (newRecording) => {
-    setText(newRecording);
+    setData((prevData) => ({
+      ...prevData,
+      context: prevData.context.slice(0, -1),
+    }));
   };
 
   const handleMicButtonClick = () => {
@@ -82,25 +84,19 @@ export default function Writing() {
 
   if (error) return <p>지원이 되지 않는 기종입니다.🤷‍</p>;
 
-  // Updated handleClickSave to take text as an argument
-  const handleClickSave = () => {
-    setData({
-      ...data,
-      context: text,
-    });
+  const handleClickSave = async () => {
+    console.log("서버로 보내는 Data:", data);
 
-    console.log("Save Data:", data);
+    try {
+      const res = await axios.post(`${BASE_URL}/dairy/create`, data);
+      // const response = await axios.post(`${BASE_URL}/dairy/create`, {
+      //   data,
+      // });
 
-    axios
-      .post(`${BASE_URL}/dairy/create`, {
-        data,
-      })
-      .then((response) => {
-        console.log("서버 응답:", response.data);
-      })
-      .catch((error) => {
-        console.error("서버 요청 중 오류 발생:", error);
-      });
+      console.log("서버 응답:", res.data);
+    } catch (error) {
+      console.error("서버 요청 중 오류 발생:", error);
+    }
   };
 
   return (
@@ -121,7 +117,7 @@ export default function Writing() {
               )}
             </div>
             {/* Display the text */}
-            {text}
+            {data.context}
             <text className="Writing-text"></text>
           </div>
 
