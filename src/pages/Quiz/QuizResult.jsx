@@ -71,9 +71,7 @@ export default function Quiz() {
     return (
       <div className="quiz-container quiz-question">
         <p>{`${today} 퀴즈 결과입니다. `}</p>
-        <p>
-          {`${today} 퀴즈 결과입니다. `}
-        </p>
+
         <p>
           {`총 ${numOfQuestions} 문항 중 `}
           <span className="quiz-txt txt-primary">{`${quizResultData.correct_num} 문항`}</span>
