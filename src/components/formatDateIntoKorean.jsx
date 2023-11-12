@@ -1,4 +1,5 @@
 export const formatDateIntoKorean = (writeDate) => {
+  console.log(writeDate, "writeDate");
   //{2023-11-11} -> 2023년 11월 11일로 만드는 함수
   const dateObject = new Date(writeDate);
   // 날짜 포맷 옵션

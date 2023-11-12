@@ -9,6 +9,7 @@ import Quiz from "../src/pages/Quiz/Quiz";
 import QuizResult from "../src/pages/Quiz/QuizResult";
 import Chart from "../src/pages/Chart/Chart";
 import { Loader } from "./components/Loader";
+import First from "../src/pages/Writing/First";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/reading" element={<Reading />} />
           <Route path="/writing" element={<Writing />} />
+          <Route path="/writing2" element={<First />} />
           <Route exact path="/" element={<Home />} />
           <Route path="*" element={<Error />} />
           <Route path="/quiz" element={<Quiz />} />

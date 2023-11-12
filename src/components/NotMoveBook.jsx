@@ -4,9 +4,9 @@ import "./FlipBook.scss";
 export const NotMoveBook = ({ left, right, mid }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  // const handlePageChange = (page) => {
+  //   setCurrentPage(page);
+  // };
 
   return (
     <div className="cover">
@@ -31,20 +31,18 @@ export const NotMoveBook = ({ left, right, mid }) => {
           {right}
         </label>
 
-        <input
+        {/* <input
           type="radio"
           name="page"
           id="page-1"
           checked={currentPage === 1}
-          // onChange={() => handlePageChange(1)}
         />
         <input
           type="radio"
           name="page"
           id="page-2"
           checked={currentPage === 2}
-          // onChange={() => handlePageChange(2)}
-        />
+        /> */}
 
         {/* 움직이는 페이지 */}
         <label
