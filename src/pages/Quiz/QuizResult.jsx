@@ -21,7 +21,6 @@ export default function Quiz() {
     QnAList: [],
     correct_num: 0,
     wrong_num: 0,
-    risk: 0,
     date: "", 
   });
   
@@ -59,7 +58,6 @@ export default function Quiz() {
         const newFormattedDate = formatDateIntoKorean(date);
         setFormattedDate(newFormattedDate);
         console.log(`formattedDate: `, formattedDate);
-        
       })
       .catch((error) => {
         console.error("Error: failed fetching the quiz result", error);
