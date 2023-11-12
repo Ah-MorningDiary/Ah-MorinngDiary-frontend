@@ -24,18 +24,54 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
 
         overflow: auto; // 스크롤 
 
-        .chart-title {
-            h1 {
-                font-family: $font-title;
-                font-size: $font-size-h;
-                font-weight: 900;
-                text-align: left;
+        .title-wrapper {
+            display: flex;
+            justify-content: space-between;
+
+            .chart-title {
+                h1 {
+                    font-family: $font-title;
+                    font-size: $font-size-h;
+                    font-weight: 900;
+                    text-align: left;
+                }
+
+                p {
+                    font-family: $font-body;
+                    font-size: $font-size-p;
+                    text-align: left;
+                }
             }
 
-            p {
-                font-family: $font-body;
-                font-size: $font-size-p;
-                text-align: left;
+            .risk-examples {
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-end;
+                gap: 30px;
+                margin-right: 10px;
+
+                .risk-examples-item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    p {
+                        font-family: $font-body;
+                        font-size: $font-size-small;
+                    }
+                }
+
+                .risk-high {
+                    color: $color-red-font;
+                }
+
+                .risk-mid {
+                    color: $color-orange-font;
+                }
+
+                .risk-low {
+                    color: $color-sky-font;
+                }
             }
         }
 
@@ -43,7 +79,37 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
             height: auto;
             // @include wrapper-width;
             @include place-center;
-            flex-direction: column; 
+            
+            // 좌우 화살표 버튼
+            button {
+                background-color: transparent;
+                border: none;
+                color: $color-ashbrown;
+
+                padding: 0 20px;
+            }
+
+            // 찐 차트
+            .chart-risk-changes {
+                overflow-x: scroll;
+                border: 1px solid $color-black;
+            }
+        }
+
+        .container-bookBlank {
+            background: $bookBlankUrl;
+            background-size: 100% 100%; 
+            min-height: 20%;
+
+            padding: 0px 60px;
+        }
+
+        .bookmark-month {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
 
         .container-doromari {
@@ -57,14 +123,6 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
             padding-right: 60px;
 
             // margin-bottom: 30px;
-        }
-
-        .container-bookBlank {
-            background: $bookBlankUrl;
-            background-size: 100% 100%; 
-            min-height: 20%;
-
-            padding: 0px 60px;
         }
         
     }
