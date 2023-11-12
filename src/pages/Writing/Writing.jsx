@@ -8,7 +8,7 @@ import axios from "axios";
 import { BASE_URL, IMAGE_API } from "../../utils/URL";
 import { motion, useScroll } from "framer-motion";
 import HomeButton from "../../components/HomeButton";
-import Resizer from "react-image-file-resizer";
+import ImageUploader from "../../components/ImageUploader";
 
 export default function Writing() {
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -35,6 +35,17 @@ export default function Writing() {
       ...data,
       whether: newWeather,
     });
+  };
+
+  const [image, setImage] = useState("");
+
+  const handleImageChange = (imageUrl) => {
+    setImage(imageUrl);
+    setData({
+      ...data,
+      imgUrl: imageUrl,
+    });
+    console.log(image, "image");
   };
 
   const fileInput = useRef([]);
@@ -90,6 +101,7 @@ export default function Writing() {
     try {
       const res = await axios.post(`${BASE_URL}/dairy/create`, data);
       console.log("서버 응답:", res.data);
+      alert(res.data.message);
     } catch (error) {
       console.error("서버 요청 중 오류 발생:", error);
     }
@@ -102,15 +114,16 @@ export default function Writing() {
         <div className="Writing-container">
           <div className="Writing-item Writing-text">
             <div>
-              <input type="file" id="file" onChange={onImageUpload} />
+              <ImageUploader onImageUpload={handleImageChange} />
+
+              {/* <input type="file" id="file" onChange={onImageUpload} />
               {imageURL && (
                 <img
                   src={imageURL}
                   alt="Preview"
                   width={"200px"}
                   height={"200px"}
-                />
-              )}
+                /> */}
             </div>
             {/* Display the text */}
             {data.context}
