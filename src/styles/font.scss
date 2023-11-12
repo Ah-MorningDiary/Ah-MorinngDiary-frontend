@@ -15,5 +15,12 @@
 $font-title: "GowunDodum-Regular";
 $font-body: "GowunDodum-Regular";
 
+$font-size-h: 2.4rem;
 $font-size-p: 1.7rem;
+$font-size-bigger: 2.2rem;
+$font-size-small: 1.3rem;
 $font-size-button: 1.5rem;
+
+* {
+  font-family: $font-body;
+}

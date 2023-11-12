@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../Quiz/Quiz.scss";
 import HomeButton from "../../components/HomeButton";
 import { Button } from "../../components/Button";
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import bookBlank_edge from '../../../public/img/bookBlank_edge.png';
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
@@ -11,17 +11,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faFaceSmileWink} from '@fortawesome/free-regular-svg-icons';
 import {faFaceMeh} from '@fortawesome/free-regular-svg-icons';
 import {faFaceTired} from '@fortawesome/free-regular-svg-icons';
+// import { Risk } from "../../components/RiskFontAwesome";
 
 export default function Quiz() {
+  const numOfQuestions = 6;
   const linkHome = "/home";
 
   // 받아온 데이터
   const [quizResultData, setQuizResultData] = useState({
-    QnAList: [],
+    // QnAList: [],
     correct_num: 0,
     wrong_num: 0,
-    risk: 0,
-    date: "", // string 맞나??
+    date: "", 
   });
   
   // 위험도 포맷팅 to 스트링
@@ -42,19 +43,25 @@ export default function Quiz() {
   const [formattedDate, setFormattedDate] = useState("");
 
   useEffect(() => {
+    // 날짜 테스트용
+    setFormattedDate(formatDateIntoKorean("2023-12-25"));
+
     axios
       .get(`${BASE_URL}/quiz/result`, {})
       .then((response) => {
-        const { QnAList, correct_num, wrong_num, risk, date } = response.data;
+        // const { QnAList, correct_num, wrong_num, risk, date } = response.data;
+        const { correct_num, wrong_num, risk, date } = response.data;
         console.log(
-          `QnAlist: ${QnAList}, correct_num: ${correct_num}, wrong_num: ${wrong_num}, risk: ${risk}`
+          // `QnAlist: ${QnAList}, correct_num: ${correct_num}, wrong_num: ${wrong_num}, risk: ${risk}`
+          `correct_num: ${correct_num}, wrong_num: ${wrong_num}, risk: ${risk}`
         );
-        setQuizResultData({ QnAList, correct_num, wrong_num, risk, date });
+        // setQuizResultData({ QnAList, correct_num, wrong_num, risk, date });
+        setQuizResultData({ correct_num, wrong_num, risk, date });
         
         // 한국식 날짜로 바꿈
         const newFormattedDate = formatDateIntoKorean(date);
         setFormattedDate(newFormattedDate);
-
+        console.log(`formattedDate: `, formattedDate);
       })
       .catch((error) => {
         console.error("Error: failed fetching the quiz result", error);
@@ -68,7 +75,7 @@ export default function Quiz() {
           {`${formattedDate} 퀴즈 결과입니다. `}
         </p>
         <p>
-          {`총 10 문항 중 `}
+          {`총 ${numOfQuestions} 문항 중 `}
           <span className="quiz-txt txt-primary">{`${quizResultData.correct_num} 문항`}</span>
           {`을 맞히셨습니다. `}
         </p>
@@ -78,6 +85,7 @@ export default function Quiz() {
             quizResultData.risk === 0 ? (
               <span className="quiz-txt risk-low">
                 {`안심`}
+                {/* <Risk type="0" width="2.2rem" height="2.2rem" /> */}
                 <FontAwesomeIcon icon={faFaceSmileWink} className="face-icon" />
               </span>
             ) : quizResultData.risk === 1 ? (
@@ -133,7 +141,16 @@ export default function Quiz() {
       <main className="quiz-page">
         <section className="quiz-wrapper">
           <QuizQuestion />
-          <ReviewNote />
+          {/* <ReviewNote /> */}
+          <Link to="/chart" className="button-container">
+            <Button
+              type={"primary"}
+              width={"300px"}
+              height={"50px"}
+            >
+              나의 기억 건강 보러 가기
+            </Button>
+        </Link>
         </section>
       </main>
     </>

@@ -33,7 +33,7 @@ const Reading = () => {
   const [diaryData, setDiaryData] = useState({
     writeDate: "2023-11-01",
     context:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe repellat odio provident quo repellendus eum sint architecto reprehenderit ipsum, quia facilis magnam possimus doloremque sunt nam? Nisi laborum ad nihil!",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe repellat odio provident ",
     imgUrl: "/img/bookBackground.png",
     whether: "RAINING", //CLOUDY SNOWING SUNNY RAINING
   });
@@ -66,6 +66,7 @@ const Reading = () => {
 
   const handleDateClick = async (dayFull) => {
     try {
+      console.log(dayFull);
       const response = await axios.get(`${BASE_URL}/dairy/read/${dayFull}`);
       const data = response.data;
       setDiaryData({
@@ -76,7 +77,7 @@ const Reading = () => {
       });
       return data;
     } catch (error) {
-      console.error("Error fetching data from the server", error);
+      console.error("서버에러", error);
       throw error;
     }
   };
@@ -140,16 +141,7 @@ const Reading = () => {
             </div>
           </div>
         }
-        // mid={
-        //   <div className={`Diary-right Diary-page`}>
-        //     <div className="bottom">
-        //       <text className="Diary-text">
-        //         {diaryData && diaryData.context}
-        //       </text>
-        //     </div>
-        //   </div>
-        // }
-        right={
+        mid={
           <div className={`Diary-right Diary-page`}>
             <div className="bottom">
               <text className="Diary-text">
@@ -158,6 +150,15 @@ const Reading = () => {
             </div>
           </div>
         }
+        // right={
+        //   <div className={`Diary-right Diary-page`}>
+        //     <div className="bottom">
+        //       <text className="Diary-text">
+        //         {diaryData && diaryData.context}
+        //       </text>
+        //     </div>
+        //   </div>
+        // }
       />
     </>
   );
