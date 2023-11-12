@@ -51,8 +51,16 @@ $bookBackground: url('../../../public/img/bookBackground.png');
         li {
             flex: 1; 
         }
+        
+
     }
 }
+
+.selected {
+    background-color: $color-background; 
+    border-radius: 50%;
+    color: #c39b82; 
+  }
 
 .Reading-day {
     width: 100%;
@@ -133,7 +141,6 @@ $bookBackground: url('../../../public/img/bookBackground.png');
     line-height: 41px;
     display: flex;
     align-items: center;
-    text-align: center;
     letter-spacing: 0.016em;
     color: #000000;
     text-align: left;
@@ -147,7 +154,7 @@ $bookBackground: url('../../../public/img/bookBackground.png');
 
 .fl{
     padding: 2rem;
-    font-size: 50px;
+    font-size: 2rem;
 }
 
 .whether{
@@ -177,4 +184,10 @@ $bookBackground: url('../../../public/img/bookBackground.png');
 
 .day-items {
     flex: 1; 
+}
+
+.text-center{
+    align-items: center;
+    align-content: center;
+    text-align: center;
 }

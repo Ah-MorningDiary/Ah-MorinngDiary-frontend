@@ -29,8 +29,16 @@ const whetherRendering = (whether) => {
 const Reading = () => {
   const [dates, setDates] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
   //일기 보기 더미데이터
   const [diaryData, setDiaryData] = useState({
+    writeDate: "",
+    context: "",
+    imgUrl: "",
+    whether: "", //CLOUDY SNOWING SUNNY RAINING
+  });
+  //일기 보기 더미데이터
+  const [dummyData, setDummyData] = useState({
     writeDate: "2023-11-01",
     context:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe repellat odio provident ",
@@ -65,12 +73,14 @@ const Reading = () => {
   };
 
   const handleDateClick = async (dayFull) => {
+    setSelectedDate(dayFull);
+    console.log(selectedDate, "selectedDate");
     try {
       console.log(dayFull);
       const response = await axios.get(`${BASE_URL}/dairy/read/${dayFull}`);
       const data = response.data;
       setDiaryData({
-        writeDate: data.Date,
+        writeDate: data.writeDate,
         context: data.context,
         imgUrl: data.imgUrl,
         whether: data.whether,
@@ -109,7 +119,11 @@ const Reading = () => {
           <div className="Reading-weekCalender">
             <ul className="Reading-date">
               {dates.map((date, index) => (
-                <li key={index} onClick={() => handleDateClick(date.dayFull)}>
+                <li
+                  key={index}
+                  onClick={() => handleDateClick(date.dayFull)}
+                  className={selectedDate === date.dayFull ? "selected" : ""}
+                >
                   {date.dayOfMonth}
                 </li>
               ))}
@@ -130,8 +144,8 @@ const Reading = () => {
               <text className="Diary-text fl whether">
                 {diaryData && whetherRendering(diaryData.whether)}
               </text>
-              <text className="Diary-text fl">
-                {diaryData && formatDateIntoKorean(diaryData.writeDate)}
+              <text className="Diary-text fl text-center">
+                {diaryData.writeDate || "일기를 작성해주세요."}
               </text>
               {diaryData.imgUrl ? (
                 <img className="img" src={diaryData.imgUrl} alt="Diary Image" />
@@ -142,23 +156,10 @@ const Reading = () => {
           </div>
         }
         mid={
-          <div className={`Diary-right Diary-page`}>
-            <div className="bottom">
-              <text className="Diary-text">
-                {diaryData && diaryData.context}
-              </text>
-            </div>
+          <div className={`Diary-right Diary-page fs-l`}>
+            <text className="Diary-text">{diaryData && diaryData.context}</text>
           </div>
         }
-        // right={
-        //   <div className={`Diary-right Diary-page`}>
-        //     <div className="bottom">
-        //       <text className="Diary-text">
-        //         {diaryData && diaryData.context}
-        //       </text>
-        //     </div>
-        //   </div>
-        // }
       />
     </>
   );

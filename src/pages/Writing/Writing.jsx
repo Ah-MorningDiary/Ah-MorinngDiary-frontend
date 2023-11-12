@@ -13,8 +13,8 @@ import Resizer from "react-image-file-resizer";
 export default function Writing() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [text, setText] = useState("");
-  const [isRecording, setIsRecording] = useState(false);
   const [imageURL, setImageURL] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
 
   const handleImageUpload = (imageData) => {
     setUploadedImage(imageData);
@@ -43,10 +43,8 @@ export default function Writing() {
     fetch(IMAGE_API)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         const form = new FormData();
         form.append("file", event.target.files[0]);
-        console.log(imageURL);
 
         fetch(result.url, {
           method: "POST",
@@ -59,10 +57,6 @@ export default function Writing() {
       });
   };
 
-  const handleClickErase = () => {
-    setText((prevText) => prevText.slice(0, -1));
-  };
-
   const { error, interimResult, results, startSpeechToText, stopSpeechToText } =
     useSpeechToText({
       continuous: true,
@@ -70,30 +64,33 @@ export default function Writing() {
     });
 
   useEffect(() => {
-    setText(results.map((result) => result.transcript).join(""));
+    const updatedText = results.map((result) => result.transcript).join("");
+    handleRecordingChange(updatedText);
   }, [results]);
+
+  const handleClickErase = () => {
+    setText((prevText) => prevText.slice(0, -1));
+  };
+
+  const handleRecordingChange = (newRecording) => {
+    setText(newRecording);
+  };
 
   const handleMicButtonClick = () => {
     setIsRecording(!isRecording);
-
-    if (isRecording) {
-      stopSpeechToText();
-    } else {
-      startSpeechToText();
-    }
   };
 
   if (error) return <p>지원이 되지 않는 기종입니다.🤷‍</p>;
 
+  // Updated handleClickSave to take text as an argument
   const handleClickSave = () => {
-    // setData({
-    //   ...data,
-    //   context: text,
-    // });
+    setData({
+      ...data,
+      context: text,
+    });
 
     console.log("Save Data:", data);
 
-    // 여기서 서버로 데이터 전송하는 코드 추가
     axios
       .post(`${BASE_URL}/dairy/create`, {
         data,
@@ -123,8 +120,7 @@ export default function Writing() {
                 />
               )}
             </div>
-
-            {/* 여기에 text 넣어서 음성 녹음 저장 연결하기 */}
+            {/* Display the text */}
             {text}
             <text className="Writing-text"></text>
           </div>
@@ -133,7 +129,14 @@ export default function Writing() {
             <Button
               type={"btn-mic"}
               className={`btn-mic ${isRecording ? "active" : ""}`}
-              onClick={handleMicButtonClick}
+              onClick={() => {
+                handleMicButtonClick();
+                if (isRecording) {
+                  stopSpeechToText();
+                } else {
+                  startSpeechToText();
+                }
+              }}
             >
               {isRecording ? "stop" : "Start"}
             </Button>

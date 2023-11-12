@@ -36,15 +36,13 @@ $bookBackgroundwithBookmarkUrl: url('/img/bookBackgroundwithBookmark.png');
     /* DiaryRight */
     .Diary-right {
       flex: 1;
-      
-      //background-color: #F9F9F9;
-      }
+  
+  }
 
     /* DiaryLeft */
     .Diary-left {
       flex: 1; 
-      //background-color: #ECD5BD;
-    }
+  }
 }
 #pageSection {
   position: relative;
@@ -52,26 +50,32 @@ $bookBackgroundwithBookmarkUrl: url('/img/bookBackgroundwithBookmark.png');
 }
 
 .Diary-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
   font-family: $font-title;
   position: relative;
   font-weight: 700;
+  
   font-size: 50px;
   line-height: 91px;
-  display: flex;
-  justify-content: center;
+  
   align-items: center;
   text-align:center;
   letter-spacing: 0.016em;
   color: #000000;
   vertical-align : bottom;
   gap: 15px;
+ 
 
   &-Large {
     font-family: $font-title;
-    font-size: 70px;
+    font-size: 60px;
     vertical-align : bottom;
   }
   li{
+    font-family: $font-title;
     font-size: 20px;
     margin: 0 10px
   }
@@ -81,15 +85,12 @@ $bookBackgroundwithBookmarkUrl: url('/img/bookBackgroundwithBookmark.png');
   @include place-center;
   flex-direction: column;
   position: relative;
-  //min-width: 360px;
   height: 100%;
 }
 
-.transitioning {
-  
-}
 
 .bottom{
+  width: 100%;
   position: absolute;
 }
 
@@ -98,15 +99,24 @@ $bookBackgroundwithBookmarkUrl: url('/img/bookBackgroundwithBookmark.png');
     padding-bottom: 10px;
 }
 
+.fs-l{
+  font-size: 1.5rem;
+}
 
+.fs-m{
+  font-size: 1rem;
+}
 
   /* 모바일 화면에 적용할 스타일 */
   @media screen and (max-width: 767px) {
 
     .Diary-text{
       display: flex;
-      flex-direction: column;
+     
       font-size: 30px;
+      .fs-l{
+        font-size: 1rem;
+      }
     }
 
   }
