@@ -51,6 +51,7 @@ export default function Quiz() {
       ...prevOptions,
       { num: questionNum, answer: selectedOption },
     ]);
+
   };
 
   // 퀴즈 받아오는 GET 요청
@@ -122,7 +123,6 @@ export default function Quiz() {
               alt="bookBlank_edge"
               style={{ display: "inline-block", verticalAlign: "bottom" }}
             />
-
             {/* 가져온 퀴즈 데이터 렌더링 */}
             <div className="quiz-container quiz-options">
               <form className="options-container">

@@ -22,6 +22,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
+
 function Chart() {
   const Title = ({ title, content }) => {
     return (
@@ -38,7 +39,6 @@ function Chart() {
   //       <div className="item"></div>
   //     </section>
   //   );
-  // }
 
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1; // getMonth()는 0부터 시작
@@ -48,7 +48,6 @@ function Chart() {
     event.preventDefault();
     setMonth(event.target.value);
     console.log("You have selected ", month);
-  };
 
   // 차트 생성을 위한 데이터 GET 요청
   const params = {
@@ -122,6 +121,7 @@ function Chart() {
         <div className="bookmark-month">
           <img src={greenBookMark} />
           <select value={month} onChange={handleMonthChange}>
+
             <option value="1">1월</option>
             <option value="2">2월</option>
             <option value="3">3월</option>
