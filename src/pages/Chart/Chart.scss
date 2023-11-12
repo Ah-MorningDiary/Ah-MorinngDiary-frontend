@@ -58,6 +58,7 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
                     p {
                         font-family: $font-body;
                         font-size: $font-size-small;
+                        font-weight: 900;
                     }
                 }
 
@@ -76,7 +77,7 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
         }
 
         .chart-container {
-            height: auto;
+            height: 70px;
             // @include wrapper-width;
             @include place-center;
             
@@ -86,13 +87,16 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
                 border: none;
                 color: $color-ashbrown;
 
-                padding: 0 20px;
+                padding: 0px;
             }
 
             // 찐 차트
             .chart-risk-changes {
-                overflow-x: scroll;
-                border: 1px solid $color-black;
+                // overflow-x: scroll;
+                // border: 1px solid $color-black;
+                z-index: 1;
+
+                overflow-x: auto;
             }
         }
 
@@ -100,8 +104,12 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
             background: $bookBlankUrl;
             background-size: 100% 100%; 
             min-height: 20%;
-
-            padding: 0px 60px;
+            
+            padding: 0px 45px;
+            
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
         }
 
         .bookmark-month {
