@@ -1,8 +1,34 @@
 import "./Loader.scss";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY;
 
 export const Loader = () => {
+  const REDIRECT_URI = "http://127.0.0.1:3000/kakao/callback";
+  const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  const code = new URL(window.location.href).searchParams.get("code");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(`api/code=${code}`);
+        const token = res.headers.authorization;
+        window.localStorage.setItem("token", token);
+        console.log("Token:", token);
+        //navigate("/home");
+      } catch (e) {
+        console.error(e);
+        //navigate("/home");
+      }
+    })();
+  }, []);
+
   return (
     <div className="loader-background">
       <motion.div
@@ -31,6 +57,9 @@ export const Loader = () => {
           <text className="font">
             이 서비스는 가로모드에 최적화 되어있습니다.
           </text>
+
+          <a href={KAKAO_AUTH_URI}>카카오로 시작하기</a>
+
           <Button
             type="btn-start"
             width={"300px"}

@@ -80,13 +80,20 @@ const Reading = () => {
       const response = await axios.get(`${BASE_URL}/dairy/read/${dayFull}`);
       const data = response.data;
       setDiaryData({
-        writeDate: data.writeDate,
+        writeDate: data.date,
         context: data.context,
         imgUrl: data.imgUrl,
         whether: data.whether,
       });
+      console.log(data, "data");
       return data;
     } catch (error) {
+      setDiaryData({
+        writeDate: "",
+        context: "",
+        imgUrl: "",
+        whether: "",
+      });
       console.error("서버에러", error);
       throw error;
     }
@@ -145,7 +152,7 @@ const Reading = () => {
                 {diaryData && whetherRendering(diaryData.whether)}
               </text>
               <text className="Diary-text fl text-center">
-                {diaryData.writeDate || "일기를 작성해주세요."}
+                {diaryData.writeDate}
               </text>
               {diaryData.imgUrl ? (
                 <img className="img" src={diaryData.imgUrl} alt="Diary Image" />

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { FlipBook } from "../../components/FilpBook";
+import { BASE_URL } from "../../utils/URL";
 
 export default function Home() {
   const linkWriting = "/writing";
@@ -63,6 +64,7 @@ export default function Home() {
                   일기
                   <text className="Diary-text-Large">쓰기</text>
                 </text>
+
                 <Button type={"btn-kakko"} color={"black"}></Button>
               </div>
             }
