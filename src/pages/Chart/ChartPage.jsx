@@ -112,7 +112,10 @@ function ChartPage() {
         scales: {
           x: {
             ticks: {
-              autoSkip: false, // 모든 라벨을 표시
+              autoSkip: false, // 모든 라벨 표시
+              font: {
+                size: 22 // 폰트 사이즈
+              }
             },
           },
           y: {
