@@ -120,6 +120,7 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
         box-sizing: border-box;
         display: flex;
         flex-direction: column; 
+        @include place-center;
     
         width: 100%;
         height: 100%; 
@@ -214,6 +215,23 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
                         text-align: left;
                     }
                 }
+            }
+        }
+
+        .quizresult-button-container {
+            display: flex;
+            justify-content: center;
+
+            padding-top: 30px;
+
+            Button {
+                font-family: $font-body;
+                font-size: $font-size-button;
+            }
+
+            Button:disabled {
+                cursor: not-allowed;
+                background-color: $color-disabled;
             }
         }
     }
