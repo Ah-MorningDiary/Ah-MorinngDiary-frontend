@@ -35,6 +35,7 @@ export const RiskExamples = () => {
 };
 
 export const Risk = ({ type, width, height }) => {
+
   return (
     <>
       {/* 0: 안심, 1: 보통, 2: 위험 */}
