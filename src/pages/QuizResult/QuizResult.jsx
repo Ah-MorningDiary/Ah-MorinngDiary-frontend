@@ -22,7 +22,7 @@ export default function Quiz() {
     correct_num: 0,
     wrong_num: 0,
     risk: 0,
-    date: "", // string 맞나??
+    date: "", 
   });
   
   // 위험도 포맷팅 to 스트링
@@ -43,6 +43,9 @@ export default function Quiz() {
   const [formattedDate, setFormattedDate] = useState("");
 
   useEffect(() => {
+    // 날짜 테스트용
+    setFormattedDate(formatDateIntoKorean("2023-12-25"));
+
     axios
       .get(`${BASE_URL}/quiz/result`, {})
       .then((response) => {
@@ -55,7 +58,8 @@ export default function Quiz() {
         // 한국식 날짜로 바꿈
         const newFormattedDate = formatDateIntoKorean(date);
         setFormattedDate(newFormattedDate);
-
+        console.log(`formattedDate: `, formattedDate);
+        
       })
       .catch((error) => {
         console.error("Error: failed fetching the quiz result", error);
