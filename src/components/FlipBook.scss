@@ -121,6 +121,7 @@ body {
     display: none;
     
     &:checked+.book__page {
+      overflow: scroll;
       transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
       transform: rotateY(-180deg);
     }

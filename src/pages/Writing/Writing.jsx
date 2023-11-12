@@ -13,8 +13,8 @@ import Resizer from "react-image-file-resizer";
 export default function Writing() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [text, setText] = useState("");
-  const [isRecording, setIsRecording] = useState(false);
   const [imageURL, setImageURL] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
 
   const handleImageUpload = (imageData) => {
     setUploadedImage(imageData);
@@ -23,19 +23,19 @@ export default function Writing() {
   const [data, setData] = useState({
     context: "",
     imgUrl: "",
-    weather: "",
+    whether: "",
   });
-
-  const handleWeatherChange = (newWeather) => {
-    setData({
-      ...data,
-      weather: newWeather,
-    });
-  };
 
   useEffect(() => {
     console.log(data);
   }, [data]);
+
+  const handleWeatherChange = (newWeather) => {
+    setData({
+      ...data,
+      whether: newWeather,
+    });
+  };
 
   const fileInput = useRef([]);
 
@@ -43,10 +43,8 @@ export default function Writing() {
     fetch(IMAGE_API)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         const form = new FormData();
         form.append("file", event.target.files[0]);
-        console.log(imageURL);
 
         fetch(result.url, {
           method: "POST",
@@ -59,10 +57,6 @@ export default function Writing() {
       });
   };
 
-  const handleClickErase = () => {
-    setText((prevText) => prevText.slice(0, -1));
-  };
-
   const { error, interimResult, results, startSpeechToText, stopSpeechToText } =
     useSpeechToText({
       continuous: true,
@@ -70,38 +64,39 @@ export default function Writing() {
     });
 
   useEffect(() => {
-    setText(results.map((result) => result.transcript).join(""));
+    const updatedText = results.map((result) => result.transcript).join("");
+    setData({
+      ...data,
+      context: updatedText,
+    });
   }, [results]);
+
+  const handleClickErase = () => {
+    setData((prevData) => ({
+      ...prevData,
+      context: prevData.context.slice(0, -1),
+    }));
+  };
 
   const handleMicButtonClick = () => {
     setIsRecording(!isRecording);
-
-    if (isRecording) {
-      stopSpeechToText();
-    } else {
-      startSpeechToText();
-    }
   };
 
-  const handleClickSave = () => {
-    setData({
-      ...data,
-      context: text,
-    });
+  if (error) return <p>지원이 되지 않는 기종입니다.🤷‍</p>;
 
-    console.log("Save Data:", data);
+  const handleClickSave = async () => {
+    console.log("서버로 보내는 Data:", data);
 
-    // 여기서 서버로 데이터 전송하는 코드 추가
-    axios
-      .post(`${BASE_URL}/dairy/create`, {
-        data,
-      })
-      .then((response) => {
-        console.log("서버 응답:", response.data);
-      })
-      .catch((error) => {
-        console.error("서버 요청 중 오류 발생:", error);
-      });
+    try {
+      const res = await axios.post(`${BASE_URL}/dairy/create`, data);
+      // const response = await axios.post(`${BASE_URL}/dairy/create`, {
+      //   data,
+      // });
+
+      console.log("서버 응답:", res.data);
+    } catch (error) {
+      console.error("서버 요청 중 오류 발생:", error);
+    }
   };
 
   return (
@@ -110,16 +105,6 @@ export default function Writing() {
       <div className="Writing-wrapper">
         <div className="Writing-container">
           <div className="Writing-item Writing-text">
-            <div className="image-upload-ui">
-              <button
-                onClick={() => {
-                  // Placeholder for future enhancements related to image uploads
-                }}
-              >
-                추가하기
-              </button>
-            </div>
-
             <div>
               <input type="file" id="file" onChange={onImageUpload} />
               {imageURL && (
@@ -131,9 +116,8 @@ export default function Writing() {
                 />
               )}
             </div>
-
-            {/* 여기에 text 넣어서 음성 녹음 저장 연결하기 */}
-            {text}
+            {/* Display the text */}
+            {data.context}
             <text className="Writing-text"></text>
           </div>
 
@@ -141,7 +125,14 @@ export default function Writing() {
             <Button
               type={"btn-mic"}
               className={`btn-mic ${isRecording ? "active" : ""}`}
-              onClick={handleMicButtonClick}
+              onClick={() => {
+                handleMicButtonClick();
+                if (isRecording) {
+                  stopSpeechToText();
+                } else {
+                  startSpeechToText();
+                }
+              }}
             >
               {isRecording ? "stop" : "Start"}
             </Button>
@@ -152,42 +143,38 @@ export default function Writing() {
           <div className="btn-items btn-group">
             <Button
               type="primary"
-              style={{ fontSize: "1.5rem", width: "100%", height: "50px" }}
+              style={{ fontSize: "1.3rem", width: "100%", height: "50px" }}
               onClick={handleClickSave}
             >
               저장하기
             </Button>
 
             <div className="btn-group">
-              <img
-                src="/img/sunny.png"
-                style={{ width: "80px", height: "80px" }}
+              <button
+                className="weather-btn sunny"
                 onClick={() => handleWeatherChange("SUNNY")}
                 alt="SUNNY"
               />
-              <img
-                src="/img/cloudy.png"
-                style={{ width: "80px", height: "80px" }}
-                onClick={() => handleWeatherChange("CLOUDY")}
-                alt="Cloudy"
+              <button
+                className="weather-btn cloudy"
+                onClick={() => handleWeatherChange("CLODY")}
+                alt="cloudy"
               />
-              <img
-                src="/img/rainy.png"
-                style={{ width: "80px", height: "80px" }}
+              <button
+                className="weather-btn rainy"
                 onClick={() => handleWeatherChange("RAINING")}
-                alt="RAINING"
+                alt="rainy"
               />
-              <img
-                src="/img/snow.png"
-                style={{ width: "80px" }}
+              <button
+                className="weather-btn snow"
                 onClick={() => handleWeatherChange("SNOWING")}
-                alt="SNOWING"
+                alt="snow"
               />
             </div>
 
             <Button
               type="secondary"
-              style={{ fontSize: "1.5rem", width: "100%", height: "50px" }}
+              style={{ fontSize: "1.3rem", width: "100%", height: "50px" }}
               onClick={handleClickErase}
             >
               지우기
