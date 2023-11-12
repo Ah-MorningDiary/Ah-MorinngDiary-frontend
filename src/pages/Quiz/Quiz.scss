@@ -18,9 +18,10 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
         display: flex;
         flex-direction: column; 
         gap: 20px; // quesion과 options 간격
+        padding-bottom: 20px; // .button-container와 간격
     
         width: 100%;
-        height: calc(100vh - 140px); // 여백이랑 button-container 높이 빼고
+        height: calc(100vh - 116px); // 여백이랑 button-container 높이 빼고
         margin: 0px auto;
         // padding: 30px;
 
@@ -240,7 +241,9 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
         display: flex;
         justify-content: space-between;
 
-        padding-top: 20px;
+        box-shadow: 0px 0px 14px 16px $color-background; /* 블러 효과 및 색상 조절 */
+        position: relative; 
+        z-index: 1;
 
         Button {
             font-family: $font-body;
@@ -252,6 +255,17 @@ $bookBlankUrl: url('/img/bookBlank_content_small.png');
             background-color: $color-disabled;
         }
     }
+
+    // .button-container::before {
+    //     content: '';
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 10px; /* 조절하여 테두리의 두께를 설정 */
+    //     z-index: -1; /* 요소 뒤에 위치하도록 설정 */
+    // }
+    
 }
   
   
