@@ -14,16 +14,16 @@ export default function Quiz() {
   const navigate = useNavigate();
   const [questionNum, setQuestionNum] = useState(1);
   const [selectedOption, setSelectedOption] = useState(0);
-  const [selectedOptionList, setSelectedOptionList] = useState([]);
+  const [answerList, setAnswerList] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleOptionChange = (event) => {
     event.preventDefault();
     setSelectedOption(event.target.value);
-    console.log("You have selected: ", selectedOption);
+    console.log("You have selected: ", selectedOption, "on question No. ", questionNum);
 
-    // 선택한 답을 배열에 저장 -> 나중에 POST 요청의 params로 전달
-    setSelectedOptionList(prevOptions => [...prevOptions, event.target.value]);
+    // questionNum, 선택한 답을 배열에 저장 -> 나중에 POST 요청의 params로 전달
+    setAnswerList(prevOptions => [...prevOptions, { num: questionNum, answer: selectedOption }]);
 
     // 다시 돌아오면 고칠 수 있도록
   };
@@ -82,7 +82,7 @@ export default function Quiz() {
 
   // 제출 POST 요청
   const paramsToSubmit = {
-    answer: selectedOptionList,
+    answerList: answerList,
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export default function Quiz() {
               괜찮겠지 뭘 해도 착한 얼굴에 니 말 잘 들을 땐 괜찮지 않아
               그런 건 내 룰은 나만 정할래 yeah 볼 거야 금지된 걸 Never
               hold back 더 자유롭게
-              {/* {`${quizData.Q_num}. ${quizData.Question}`} */}
+              {/* {`${questionNum}. ${quizData.Question}`} */}
             </p>
           </div>
 
@@ -146,6 +146,7 @@ export default function Quiz() {
                     value="1"
                     checked={selectedOption === 1}
                     style={{ transform: "scale(1.8)" }}
+                    // onChange={(event) => handleOptionChange(event, questionNum)}
                     onChange={handleOptionChange}
                   />
                   <p>
