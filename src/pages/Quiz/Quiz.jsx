@@ -185,7 +185,7 @@ export default function Quiz() {
         <section className="button-container">
           <Button
             type={"secondary"}
-            width={"160px"}
+            width={"200px"}
             height={"50px"}
             onClick={handleBackward}
             disabled={questionNum === 1}
@@ -196,7 +196,7 @@ export default function Quiz() {
           {questionNum === numOfQuestions ? (
             <Button
               type={"primary"}
-              width={"160px"}
+              width={"200px"}
               height={"50px"}
               onClick={handleSubmit}
             >
@@ -205,7 +205,7 @@ export default function Quiz() {
           ) : (
             <Button
               type={"primary"}
-              width={"160px"}
+              width={"200px"}
               height={"50px"}
               onClick={handleForward}
             >
