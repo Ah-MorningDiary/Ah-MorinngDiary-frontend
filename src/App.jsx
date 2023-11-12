@@ -9,6 +9,7 @@ import Quiz from "../src/pages/Quiz/Quiz";
 import QuizResult from "../src/pages/Quiz/QuizResult";
 import ChartPage from "../src/pages/Chart/ChartPage";
 import { Loader } from "./components/Loader";
+import First from "../src/pages/Writing/First";
 
 export default function App() {
   return (
