@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./Quiz.scss";
 import HomeButton from "../../components/HomeButton";
 import { Button } from "../../components/Button";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import bookBlank_edge from "../../../public/img/bookBlank_edge.png";
 import axios from "axios";
 import { BASE_URL } from "../../utils/URL";
 
 export default function Quiz() {
   const numOfQuestions = 6;
-  const linkHome = "/home";
   const linkQuizResult = "/quiz/result";
   const navigate = useNavigate();
   const [questionNum, setQuestionNum] = useState(1);
@@ -19,8 +18,9 @@ export default function Quiz() {
 
   const handleOptionChange = (event) => {
     event.preventDefault();
-    setSelectedOption(event.target.value);
-    console.log("You have selected: ", selectedOption, "on question No. ", questionNum);
+    setSelectedOption(parseInt(event.target.value));
+
+    console.log("You have selected option No. ", selectedOption, "on question No. ", questionNum);
 
     // questionNum, 선택한 답을 배열에 저장 -> 나중에 POST 요청의 params로 전달
     setAnswerList(prevOptions => [...prevOptions, { num: questionNum, answer: selectedOption }]);
@@ -48,31 +48,31 @@ export default function Quiz() {
   // 퀴즈 받아오는 GET 요청
   // date는 'YYYY-MM-DD' 형식으로 변환해줌
   let date = new Date();
-  date.setDate(date.getDate() - 1);
-  const dateYesterday = date.toISOString().split("T")[0];
+  date.setDate(date.getDate());
+  const newDate = date.toISOString().split("T")[0];
   const paramsToGetQuiz = {
-    date: dateYesterday,
+    // date: newDate,
     num: questionNum,
   };
 
   // 받아온 데이터
   const [quizData, setQuizData] = useState({
-    Q_num: 1,
-    Question: "",
-    Answer: [],
+    type: "",
+    question: "",
+    options: [],
   });
 
   useEffect(() => {
     console.log(`Question Number: ${questionNum}`);
 
     axios
-      .get(`${BASE_URL}/quiz`, { paramsToGetQuiz })
+      .get(`${BASE_URL}/quiz/${questionNum}`, { paramsToGetQuiz })
       .then((response) => {
-        const { Q_num, Question, Answer } = response.data;
+        const { type, question, options } = response.data;
         console.log(
-          `Q_num: ${Q_num}, Question: ${Question}, Answer: ${Answer}`
+          `type: ${type}, question: ${question}, options: ${options}`
         );
-        setQuizData({ Q_num, Question, Answer });
+        setQuizData({ type, question, options });
       })
       .catch((error) => {
         console.error("Error: failed fetching the quiz", error);
@@ -105,14 +105,15 @@ export default function Quiz() {
         <section className="quiz-wrapper">
           <div className="quiz-container quiz-question">
             <p>
-              I'm a mess, mess, mess, mess, mess, mess, mess I'm a mess,
+              {/* 테스트용 */}
+              {/* I'm a mess, mess, mess, mess, mess, mess, mess I'm a mess,
               mess, mess, mess, mess, mess, mess I'm a mess in distress
               But we're still the best dressed Fearless, say yes, we don't
               dress to impress 괜찮단다 뭘 해도 거짓말인 걸 난 알아
               괜찮겠지 뭘 해도 착한 얼굴에 니 말 잘 들을 땐 괜찮지 않아
               그런 건 내 룰은 나만 정할래 yeah 볼 거야 금지된 걸 Never
-              hold back 더 자유롭게
-              {/* {`${questionNum}. ${quizData.Question}`} */}
+              hold back 더 자유롭게 */}
+              {`${questionNum}. ${quizData.question}`}
             </p>
           </div>
 
@@ -122,10 +123,11 @@ export default function Quiz() {
               alt="bookBlank_edge"
               style={{ display: "inline-block", verticalAlign: "bottom" }}
             />
-
+            
+            {/* 가져온 퀴즈 데이터 렌더링 */}
             <div className="quiz-container quiz-options">
               <form className="options-container">
-                {/* {quizData.Answer.map((answer, index) => (
+                {quizData.options.map((answer, index) => (
                   <label key={index} className="options-item">
                     <input
                       type="radio"
@@ -137,9 +139,10 @@ export default function Quiz() {
                     />
                     <p>{answer}</p>
                   </label>
-                ))} */}
+                ))}
 
-                <label className="options-item">
+                {/* 테스트용 */}
+                {/* <label className="options-item">
                   <input
                     type="radio"
                     name="option"
@@ -171,7 +174,7 @@ export default function Quiz() {
                     Get it like boom, boom, boom
                     Get it like boom, boom, boom (oh-oh)
                   </p>
-                </label>
+                </label> */}
               </form>
             </div>
 
