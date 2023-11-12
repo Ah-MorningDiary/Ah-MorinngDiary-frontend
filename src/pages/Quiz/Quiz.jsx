@@ -22,9 +22,6 @@ export default function Quiz() {
 
     console.log("You have selected option No. ", selectedOption, "on question No. ", questionNum);
 
-    // questionNum, 선택한 답을 배열에 저장 -> 나중에 POST 요청의 params로 전달
-    setAnswerList(prevOptions => [...prevOptions, { num: questionNum, answer: selectedOption }]);
-
     // 다시 돌아오면 고칠 수 있도록
   };
 
@@ -43,13 +40,16 @@ export default function Quiz() {
     if (questionNum < numOfQuestions) {
       setQuestionNum(questionNum + 1);
     }
+
+    // questionNum, 선택한 답을 배열에 저장 -> 나중에 POST 요청의 params로 전달
+    setAnswerList(prevOptions => [...prevOptions, { num: questionNum, answer: selectedOption }]);
   };
 
   // 퀴즈 받아오는 GET 요청
-  // date는 'YYYY-MM-DD' 형식으로 변환해줌
-  let date = new Date();
-  date.setDate(date.getDate());
-  const newDate = date.toISOString().split("T")[0];
+  // date는 'YYYY-MM-DD' 형식으로 변환
+  // let date = new Date();
+  // date.setDate(date.getDate());
+  // const newDate = date.toISOString().split("T")[0];
   const paramsToGetQuiz = {
     // date: newDate,
     num: questionNum,
@@ -62,6 +62,8 @@ export default function Quiz() {
     options: [],
   });
 
+  const [numOfGet, setNumOfGet] = useState(0); // GET 받아온 횟수
+
   useEffect(() => {
     console.log(`Question Number: ${questionNum}`);
 
@@ -73,11 +75,12 @@ export default function Quiz() {
           `type: ${type}, question: ${question}, options: ${options}`
         );
         setQuizData({ type, question, options });
+        setNumOfGet(numOfGet + 1);
       })
       .catch((error) => {
         console.error("Error: failed fetching the quiz", error);
       });
-  }, [questionNum]);
+  }, [questionNum + 1]);
 
 
   // 제출 POST 요청
@@ -105,15 +108,7 @@ export default function Quiz() {
         <section className="quiz-wrapper">
           <div className="quiz-container quiz-question">
             <p>
-              {/* 테스트용 */}
-              {/* I'm a mess, mess, mess, mess, mess, mess, mess I'm a mess,
-              mess, mess, mess, mess, mess, mess I'm a mess in distress
-              But we're still the best dressed Fearless, say yes, we don't
-              dress to impress 괜찮단다 뭘 해도 거짓말인 걸 난 알아
-              괜찮겠지 뭘 해도 착한 얼굴에 니 말 잘 들을 땐 괜찮지 않아
-              그런 건 내 룰은 나만 정할래 yeah 볼 거야 금지된 걸 Never
-              hold back 더 자유롭게 */}
-              {`${questionNum}. ${quizData.question}`}
+              {`${questionNum}. ${numOfGet}. ${quizData.question}`}
             </p>
           </div>
 
@@ -127,7 +122,7 @@ export default function Quiz() {
             {/* 가져온 퀴즈 데이터 렌더링 */}
             <div className="quiz-container quiz-options">
               <form className="options-container">
-                {quizData.options.map((answer, index) => (
+                {quizData.options.map((option, index) => (
                   <label key={index} className="options-item">
                     <input
                       type="radio"
@@ -137,7 +132,7 @@ export default function Quiz() {
                       style={{ transform: 'scale(1.8)' }}
                       onChange={handleOptionChange}
                     />
-                    <p>{answer}</p>
+                    <p>{option}</p>
                   </label>
                 ))}
 
@@ -161,18 +156,6 @@ export default function Quiz() {
                     그런 건 내 룰은 나만 정할래 yeah 볼 거야 금지된 걸 Never
                     hold back 더 자유롭게
                     Boom, boom, boom 내 심장이 뛰네
-
-                    Get it like boom, boom, boom
-                    Get it like boom, boom, boom (boom, boom now)
-                    Boom, boom, boom 내 심장이 뛰네
-                    Get it like boom, boom, boom
-                    Get it like boom, boom, boom (push it)
-                    I wish for what's forbidden
-                    Get it like boom, boom, boom
-                    Get it like boom, boom, boom (push it)
-                    (Oh-oh) I wish for what's forbidden
-                    Get it like boom, boom, boom
-                    Get it like boom, boom, boom (oh-oh)
                   </p>
                 </label> */}
               </form>

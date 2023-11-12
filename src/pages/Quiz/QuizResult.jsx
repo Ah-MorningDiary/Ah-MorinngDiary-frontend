@@ -39,13 +39,13 @@ export default function Quiz() {
   //     break;
   // }
 
-  // 날짜 포맷팅
-  const [formattedDate, setFormattedDate] = useState("");
+  // 날짜 포맷팅 to Korean - 오늘 날짜
+  let date = new Date();
+  date.setDate(date.getDate());
+  let today = date.toISOString().split("T")[0];
+  today = formatDateIntoKorean(today);
 
   useEffect(() => {
-    // 날짜 테스트용
-    setFormattedDate(formatDateIntoKorean("2023-12-25"));
-
     axios
       .get(`${BASE_URL}/quiz/result`, {})
       .then((response) => {
@@ -72,7 +72,7 @@ export default function Quiz() {
     return (
       <div className="quiz-container quiz-question">
         <p>
-          {`${formattedDate} 퀴즈 결과입니다. `}
+          {`${today} 퀴즈 결과입니다. `}
         </p>
         <p>
           {`총 ${numOfQuestions} 문항 중 `}
