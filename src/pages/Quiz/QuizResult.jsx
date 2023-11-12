@@ -14,6 +14,7 @@ import {faFaceTired} from '@fortawesome/free-regular-svg-icons';
 // import { Risk } from "../../components/RiskFontAwesome";
 
 export default function Quiz() {
+  const numOfQuestions = 6;
   const linkHome = "/home";
 
   // 받아온 데이터
@@ -74,7 +75,7 @@ export default function Quiz() {
           {`${formattedDate} 퀴즈 결과입니다. `}
         </p>
         <p>
-          {`총 10 문항 중 `}
+          {`총 ${numOfQuestions} 문항 중 `}
           <span className="quiz-txt txt-primary">{`${quizResultData.correct_num} 문항`}</span>
           {`을 맞히셨습니다. `}
         </p>
