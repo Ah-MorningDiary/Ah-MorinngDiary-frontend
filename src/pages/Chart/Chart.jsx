@@ -157,16 +157,13 @@ function Chart() {
   return (
     <>
       <HomeButton />
-
       <main className="chart-page">
         <section className="chart-wrapper">
           <div className="title-wrapper">
             <Title title="나의 기억 건강 관리" content="월별 건강 상태의 추이를 살피고 관리해보세요." />
             <RiskExamples />
           </div>
-
           <ContainerRiskChanges />
-
           <ContainerRiskNums />
         </section>
       </main>
