@@ -57,22 +57,20 @@ function ChartPage() {
     month: month,
   };
 
-  const [chartData, setChartData] = useState({ riskChanges: [], riskNums: [] });
+  const [chartData, setChartData] = useState({ riskChanges: [] });
 
   useEffect(() => {
     // console.log(`current month: `, month); // 월 테스트용
     axios
       .get(`${BASE_URL}/chart/${month}`, { params })
       .then((response) => {
-        const { riskChanges, riskNums } = response.data;
+        const { riskChanges } = response.data;
         // 한 달 간 날짜별 위험도
         // List [[date, risk]]
-        // 한 달 간 위험도별 건수
-        // List(안 푼 날 수, 안심 수, 보통 수, 위험 수)
         console.log(
-          `한 달 간 날짜별 위험도: ${riskChanges}, 위험도별 건수: ${riskNums}`
+          `한 달 간 날짜별 위험도: ${riskChanges}`
         );
-        setChartData({ riskChanges, riskNums });
+        setChartData({ riskChanges });
 
         // 차트 생성
       })
@@ -80,6 +78,58 @@ function ChartPage() {
         console.error("Error: failed fetching the chart", error);
       });
   }, [month]);
+
+  const LineChart = () => {
+    const data = {
+      labels: [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 
+        '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', 
+        '21', '22', '23', '24', '25', '26', '27', '28', '29', '30' ],
+      datasets: [
+        {
+          label: '1',
+          data: [12, 19, 3, 5, 2, 3],
+          fill: false,
+          backgroundColor: 'white',
+          borderColor: '#766E67',
+          borderWidth: 3,
+          pointRadius: 9, // 데이터 포인트의 반지름을 5px
+          pointHoverRadius: 7,
+        },
+        {
+          label: '2',
+          data: [12, 19, 3, 5, 2, 3],
+          fill: false,
+          backgroundColor: 'white',
+          borderColor: '#766E67',
+          borderWidth: 3,
+          pointRadius: 9, // 데이터 포인트의 반지름을 5px
+          pointHoverRadius: 7,
+        },
+      ],
+  };
+
+    const options = {
+        scales: {
+          x: {
+            ticks: {
+              autoSkip: false, // 모든 라벨을 표시
+            },
+          },
+          y: {
+            beginAtZero: true,
+            display: false,
+          },
+        },
+        plugins: {
+          legend: {
+            display: false, // 범례 숨기기
+          }, 
+        },
+        maintainAspectRatio: false, // 가로 세로 비율 유지 안 함
+    };
+
+    return <Line data={data} options={options} />;
+  }
 
   const ContainerRiskChanges = () => {
     return (
@@ -90,13 +140,13 @@ function ChartPage() {
             alt="bookBlank_edge"
             style={{ display: "inline-block", verticalAlign: "bottom", width: "100%", maxWidth: "1280px", }}
           />
-          <div className="chart-container container-bookBlank">
+          <div className="chart-container container-bookBlank" style={{ width: '100%', height: '260px' }}>
             <button>
               <FontAwesomeIcon icon={faChevronLeft} style={{ width: "2.5rem", height: "2.5rem", }}/>
             </button>
             {/* 차트 내용 */}
-            <div className='chart-risk-changes'>
-
+            <div className='chart-risk-changes' style={{ width: '200%', height: '100%', }}>
+              <LineChart />
             </div>
             <button>
               <FontAwesomeIcon icon={faChevronRight} style={{ width: "2.5rem", height: "2.5rem", }}/>
