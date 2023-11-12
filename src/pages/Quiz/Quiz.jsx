@@ -51,7 +51,6 @@ export default function Quiz() {
       ...prevOptions,
       { num: questionNum, answer: selectedOption },
     ]);
-
   };
 
   // 퀴즈 받아오는 GET 요청
